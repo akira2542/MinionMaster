@@ -13,30 +13,88 @@ import java.io.Serializable;
  */
 public abstract class Minion implements Serializable {
     
-    private String name;
+     // final stat
+    private final String name;
+    private final double basehealthpoint;
+    private final double basemanapoint;
+    private final double baseattackpoint;
+    private final double basearmor;
+    private final double baseevasion;
     
+    //fixed size array final
+    private final double[] levelmultiplier = new double[5];
+    
+    //changeble stat
     private int level;
-    private int[] equipmentgrade; 
-    
-    private Double maxhealthpoint;
-    private Double maxmagicpoint;
-    private Double healthpoint;
-    private Double magicpoint;
-    private Double[] statusmultiplier;
-    
+    private double maxhealthpoint;
+    private double maxmanapoint;
+    private double healthpoint;
+    private double manapoint;
+    private double attackpoint;
+    private double armor;
+    private double evasion;
     private PrimaryStatus primarystatus;
     private SecondaryStatus secondarystatus;
     
-    abstract void attack();
     
-    public Minion(String name) {
-    this.name = name;
-    this.equipmentgrade = new int[2];
-    this.equipmentgrade[0] = 1;
-    this.equipmentgrade[1] = 1;
+    //fixed size array
+    private int[] equipmentgrade = new int[2]; 
+    
+    //contructor
+        public Minion(String name,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double[] levelmultiplier) {
+    
+        this.name = name;
+        this.equipmentgrade = new int[2];
+        this.equipmentgrade[0] = 1;
+        this.equipmentgrade[1] = 1;
+        this.primarystatus = PrimaryStatus.ALIVE;
+        
+        this.basehealthpoint = basehelthpoint;
+        this.basemanapoint = basemanapoint;
+        this.baseattackpoint = baseattackpoint;
+        this.basearmor = basearmor;
+        this.baseevasion = baseevasion;
+        
+        this.healthpoint = basehelthpoint;
+        this.manapoint = basemanapoint;
+        this.attackpoint = baseattackpoint;
+        this.armor = basearmor;
+        this.evasion = baseevasion;
+        
+        System.arraycopy(levelmultiplier, 0, this.levelmultiplier, 0, this.levelmultiplier.length);
+        
     }
     
-    public void levelUp() {    
+    
+    //abstract method
+    protected abstract void useSkillOn(Minion minion);
+    public abstract void actionDecider(Minion[] ourpaty,Minion[] enemyparty);
+    
+    //preconfigured method
+    public void attackOn(Minion minion){
+        if (!minion.evasionCheck()){
+               double deducteddamage = minion.armorCheck(this.attackpoint);
+               minion.setHealthpoint(minion.getHealthpoint()- deducteddamage);
+               System.out.println(this.name+" attacked "+minion.name+" for "+deducteddamage+" damage");
+               if (minion.getHealthpoint() <= 0) { 
+                   minion.setPrimarystatus(PrimaryStatus.DEAD); 
+                   System.out.println(minion.getName() + " is Dead!");
+                }
+        } else {
+            System.out.println("Attack Missed!");
+        }
+    }
+    
+    protected boolean evasionCheck() {
+    return false;
+    }
+    
+    protected double armorCheck(double attackpoint) {
+    return attackpoint;
+    }
+    
+    private void systemSetLevel(int amount) {
+    
     }
     
     public String getName() {
@@ -55,16 +113,16 @@ public abstract class Minion implements Serializable {
         return maxhealthpoint;
     }
 
-    public Double getMaxmagicpoint() {
-        return maxmagicpoint;
+    public Double getMaxmanapoint() {
+        return maxmanapoint;
     }
 
     public Double getHealthpoint() {
         return healthpoint;
     }
 
-    public Double getMagicpoint() {
-        return magicpoint;
+    public Double getManapoint() {
+        return manapoint;
     }
 
     public PrimaryStatus getPrimarystatus() {
@@ -74,28 +132,23 @@ public abstract class Minion implements Serializable {
     public SecondaryStatus getSecondarystatus() {
         return secondarystatus;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setEquipmentgrade(int[] equipmentgrade) {
         this.equipmentgrade = equipmentgrade;
     }
 
-    public void setHealthpoint(Double healthpoint) {
+    protected void setHealthpoint(Double healthpoint) {
         this.healthpoint = healthpoint;
     }
 
-    public void setMagicpoint(Double magicpoint) {
-        this.magicpoint = magicpoint;
+    private void setManapoint(Double manapoint) {
+        this.manapoint = manapoint;
     }
 
-    public void setPrimarystatus(PrimaryStatus primarystatus) {
+    protected void setPrimarystatus(PrimaryStatus primarystatus) {
         this.primarystatus = primarystatus;
     }
 
-    public void setSecondarystatus(SecondaryStatus secondarystatus) {
+    protected void setSecondarystatus(SecondaryStatus secondarystatus) {
         this.secondarystatus = secondarystatus;
     }
 }
