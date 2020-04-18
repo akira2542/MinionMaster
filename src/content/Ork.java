@@ -12,19 +12,18 @@ import model.PrimaryStatus;
  *
  * @author COM
  */
-public class Goblin extends Minion{
+public class Ork extends Minion{
+    //    name = "Ork";
+    //    basehealthpoint = 25;
+    //    basemanapoint = 5;
+    //    baseattackpoint = 3;
+    //    basearmor = 0;
+    //    baseevasion = 5;
+    //    statmultipiler = 1.1,1.1,1.1,1.1,1.1;
+    //    skill = will attack harder if hp below 10%    
     
-//    name = "Goblin";
-//    basehealthpoint = 15;
-//    basemanapoint = 5;
-//    baseattackpoint = 3;
-//    basearmor = 0;
-//    baseevasion = 5;
-//    statmultipiler = 1.1,1.1,1.1,1.1,1.1;
-//    skill = will attack harder if hp below 10%    
-    
-    public Goblin(int position) {
-    super(position,"Goblin",15,5,3,0,5,new double[]{1.1,1.1,1.1,1.1,1.1});
+    public Ork(int position) {
+    super(position,"Ork",25,5,3,0,5,new double[]{1.1,1.1,1.1,1.1,1.1});
     }
     
     @Override
@@ -42,5 +41,4 @@ public class Goblin extends Minion{
             }
         }
     }
-    
 }

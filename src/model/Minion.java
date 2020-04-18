@@ -25,6 +25,7 @@ public abstract class Minion implements Serializable {
     private final double[] levelmultiplier = new double[5];
     
     //changeble stat
+    private int position;
     private int level;
     private double maxhealthpoint;
     private double maxmanapoint;
@@ -41,8 +42,9 @@ public abstract class Minion implements Serializable {
     private int[] equipmentgrade = new int[2]; 
     
     //contructor
-        public Minion(String name,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double[] levelmultiplier) {
-    
+        public Minion(int position,String name,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double[] levelmultiplier) {
+        
+        this.position = position;
         this.name = name;
         this.equipmentgrade = new int[2];
         this.equipmentgrade[0] = 1;
@@ -75,14 +77,17 @@ public abstract class Minion implements Serializable {
         if (!minion.evasionCheck()){
                double deducteddamage = minion.armorCheck(this.attackpoint);
                minion.setHealthpoint(minion.getHealthpoint()- deducteddamage);
-               System.out.println(this.name+" attacked "+minion.name+" for "+deducteddamage+" damage");
+               System.out.println(this.name+"("+this.getPosition()+")"+" attacked "+minion.name+"("+minion.getPosition()+")"+" for "+deducteddamage+" damage");
                if (minion.getHealthpoint() <= 0) { 
                    minion.setPrimarystatus(PrimaryStatus.DEAD); 
-                   System.out.println(minion.getName() + " is Dead!");
+                   System.out.println(minion.getName()+ "("+minion.getPosition()+")" + " is Dead!");
                 }
         } else {
             System.out.println("Attack Missed!");
         }
+    }
+    
+    public void attackOn(Minion minion,int SkillDamage) {
     }
     
     protected boolean evasionCheck() {
@@ -95,6 +100,10 @@ public abstract class Minion implements Serializable {
     
     private void systemSetLevel(int amount) {
     
+    }
+    
+    public int getPosition() {
+    return position;
     }
     
     public String getName() {
