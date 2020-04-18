@@ -11,4 +11,13 @@ package model;
  */
 public abstract class Dungeon {
     
+  private  Battle[]  waveofdungeon;//ห้องที่สู้อยู่
+  private  long reward;//ของรางวัลเช่น จำนวนเงิน
+  private  long expfromclear;//ค่าexpที่ได้จากการลงดันนี้
+  
+  
+  public void expEarn(){
+      //currentexp + expfromclear
+  }
+  
 }
