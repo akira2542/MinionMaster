@@ -14,4 +14,8 @@ import java.io.Serializable;
 
 public abstract class Profile implements Serializable {
     // parents class for PlayerProfile
+    private String username;//ชื่อไอดี
+    private long   score; //คะแนนสะสม
+    private Minion[] partyofminion;//current party
+    
 }

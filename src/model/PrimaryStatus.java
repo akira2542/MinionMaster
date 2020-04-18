@@ -10,6 +10,6 @@ package model;
  * @author COM
  */
 public enum PrimaryStatus {
-    
+    ALIVE,DEAD
 }
 

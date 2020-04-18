@@ -10,5 +10,5 @@ package model;
  * @author COM
  */
 public enum SecondaryStatus {
-    
+     STUN
 }
