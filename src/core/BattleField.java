@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
-import content.Goblin;
-import content.Ork;
+package core;
+
+import model.Minion;
 import model.PrimaryStatus;
+
 /**
  *
  * @author COM
@@ -15,25 +16,12 @@ public class BattleField {
     Minion[] localParty;
     int turncounter;
         
-    public static void main(String[] args) {
-        Minion[] p1 = new Minion[4];
-        for (int i = 0; i < p1.length; i++) {
-            p1[i] = new Goblin(i);
-        }
-         Minion[] p2 = new Minion[4];
-        for (int i = 0; i < p2.length; i++) {
-            p2[i] = new Ork(i);
-        }
-        BattleField b = new BattleField(p1);
-        b.battle(p2);
-        
-    }
-    
     public BattleField(Minion[] localParty){
          this.localParty = localParty;
     }
    
-    public void battle(Minion[] visitingParty) {
+    public boolean battle(Minion[] visitingParty) {
+        boolean battleresult = false; // true = visiting party win
         while( !isAllDead(localParty) && !isAllDead(visitingParty)){
             this.turncounter++;
             System.out.println("Turn "+this.turncounter);
@@ -43,6 +31,7 @@ public class BattleField {
             }
             if (isAllDead(localParty)) {
                 System.out.println("local minions is defeated!");
+                battleresult = true;
                 break;
             }
             System.out.println("local party turn!");
@@ -51,10 +40,11 @@ public class BattleField {
             }
             if (isAllDead(visitingParty)) {
                 System.out.println("visiting minions is defeated!");
+                battleresult = false;
                 break;
             }
         }
-    
+        return battleresult;
     }
     
     private boolean isAllDead(Minion[] party) {

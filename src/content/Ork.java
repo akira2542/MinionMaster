@@ -13,17 +13,18 @@ import model.PrimaryStatus;
  * @author COM
  */
 public class Ork extends Minion{
-    //    name = "Ork";
-    //    basehealthpoint = 25;
-    //    basemanapoint = 5;
-    //    baseattackpoint = 3;
-    //    basearmor = 0;
-    //    baseevasion = 5;
-    //    statmultipiler = 1.1,1.1,1.1,1.1,1.1;
-    //    skill = will attack harder if hp below 10%    
+    
+      private static final String DEFAULT_NAME = "Goblin";
+      private static final double BASE_HEALTPOINT = 25; 
+      private static final double BASE_MANA = 5;
+      private static final double BASE_AP = 3;
+      private static final double BASE_ARMOR = 0;
+      private static final double BASE_EVASION = 5;
+      private static final double[] STAT_MULTIPILER = {1.1,1.1,1.1,1.1,1.1}; 
+//    skill = will attack harder if hp below 10%    
     
     public Ork(int position) {
-    super(position,"Ork",25,5,3,0,5,new double[]{1.1,1.1,1.1,1.1,1.1});
+    super(position,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,STAT_MULTIPILER); 
     }
     
     @Override

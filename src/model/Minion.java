@@ -46,7 +46,7 @@ public abstract class Minion implements Serializable {
         
         this.position = position;
         this.name = name;
-        this.equipmentgrade = new int[2];
+        this.level = 1;
         this.equipmentgrade[0] = 1;
         this.equipmentgrade[1] = 1;
         this.primarystatus = PrimaryStatus.ALIVE;
@@ -56,6 +56,9 @@ public abstract class Minion implements Serializable {
         this.baseattackpoint = baseattackpoint;
         this.basearmor = basearmor;
         this.baseevasion = baseevasion;
+        
+        this.maxhealthpoint = basehelthpoint;
+        this.maxmanapoint = basehelthpoint;
         
         this.healthpoint = basehelthpoint;
         this.manapoint = basemanapoint;
@@ -98,9 +101,50 @@ public abstract class Minion implements Serializable {
     return attackpoint;
     }
     
-    private void systemSetLevel(int amount) {
-    
+    public void levelUp() {
+        this.maxhealthpoint *= this.levelmultiplier[0];
+        this.maxmanapoint *= this.levelmultiplier[1];
+        this.attackpoint *= this.levelmultiplier[2];
+        this.armor *= this.levelmultiplier[3];
+        this.evasion *= this.levelmultiplier[4];
+        this.refresh();
+        this.level++;
     }
+    
+    public void setLevel(int level) {
+        if (this.level > level) {
+            System.out.println("this minion level exceed that number");
+        }
+        while(this.level < level) {
+        this.levelUp();
+        }
+    }
+    
+    public void setEquipmentgrade(int[] equipmentgrade) {
+        this.equipmentgrade = equipmentgrade;
+    }
+
+    protected void setHealthpoint(Double healthpoint) {
+        this.healthpoint = healthpoint;
+    }
+
+    private void setManapoint(Double manapoint) {
+        this.manapoint = manapoint;
+    }
+
+    protected void setPrimarystatus(PrimaryStatus primarystatus) {
+        this.primarystatus = primarystatus;
+    }
+
+    protected void setSecondarystatus(SecondaryStatus secondarystatus) {
+        this.secondarystatus = secondarystatus;
+    }
+    
+    public void refresh() {
+    this.healthpoint = this.maxhealthpoint;
+    this.manapoint = this.maxmanapoint;
+    }
+    
     
     public int getPosition() {
     return position;
@@ -141,23 +185,5 @@ public abstract class Minion implements Serializable {
     public SecondaryStatus getSecondarystatus() {
         return secondarystatus;
     }
-    public void setEquipmentgrade(int[] equipmentgrade) {
-        this.equipmentgrade = equipmentgrade;
-    }
-
-    protected void setHealthpoint(Double healthpoint) {
-        this.healthpoint = healthpoint;
-    }
-
-    private void setManapoint(Double manapoint) {
-        this.manapoint = manapoint;
-    }
-
-    protected void setPrimarystatus(PrimaryStatus primarystatus) {
-        this.primarystatus = primarystatus;
-    }
-
-    protected void setSecondarystatus(SecondaryStatus secondarystatus) {
-        this.secondarystatus = secondarystatus;
-    }
+    
 }
