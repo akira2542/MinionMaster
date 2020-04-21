@@ -93,9 +93,21 @@ public abstract class Minion implements Serializable {
     public void attackOn(Minion minion,int SkillDamage) {
     }
     
-    protected boolean evasionCheck() {
-    return false;
+    protected boolean evasionCheck(double evasion,double accuracy) {
+        double echance = (accuracy-evasion)/accuracy;
+        boolean hit = false;
+        for (int i = 0; i < 1; i++) {
+            double rand = Math.random();
+              String.format("value is %.1f", rand) ;  
+            if(rand<=echance){
+                System.out.println("attack miss");
+                hit = false;
+            }else {System.out.println("attack hit");
+            hit = true;}
+        }
+        return hit;
     }
+    
     
     protected double armorCheck(double attackpoint) {
     return attackpoint;
