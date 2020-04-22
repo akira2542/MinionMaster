@@ -21,7 +21,7 @@ public abstract class PlayableMinion extends Minion{
     }
     
     //คำนวณ exp
-    public static int calculateLevelByXP(long XP){
+    public int calculateLevelByXP(long XP){
         //รับค่า exp มา
      
         int levelbyXP = 1;
@@ -38,7 +38,7 @@ public abstract class PlayableMinion extends Minion{
         return levelbyXP;
     }
     
-    public static long calculateXPByLevel(int level) {
+    public long calculateXPByLevel(int level) {
         if (level == 1) return BASE_REQUIRED_EXP;
         long XP = BASE_REQUIRED_EXP;
         for (int i = 1 ; i < level; i++) {
@@ -47,10 +47,6 @@ public abstract class PlayableMinion extends Minion{
         return XP;
     }
     
-    public static void main(String[] args) {
-        System.out.println(calculateLevelByXP(699));
-        System.out.println(calculateXPByLevel(2));
-    }
     
     }
 
