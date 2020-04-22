@@ -18,14 +18,15 @@ import java.io.ObjectOutputStream;
  */
 public class SaveLoadSystem {
     
-    public static void main(String[] args) {
-        SaveLoadSystem sls = new SaveLoadSystem();
-        PlayerProfile test = new PlayerProfile();
-        sls.writeProfile(test);
-        PlayerProfile loaded = sls.readProfile("test");
-        System.out.println(loaded.getUsername());
-        
-    }
+//    public static void main(String[] args) {
+//        SaveLoadSystem sls = new SaveLoadSystem();
+//        PlayerProfile test = new PlayerProfile();
+//        sls.writeProfile(test);
+//        PlayerProfile loaded = sls.readProfile("test");
+//        System.out.println(loaded.getUsername());
+//        System.out.println(loaded.getPlayerParty()[0].getName());
+//        
+//    }
     
     
     public void writeProfile(PlayerProfile profile) {
