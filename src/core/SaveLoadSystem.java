@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import model.Minion;
 
 /**
  *
@@ -18,15 +19,19 @@ import java.io.ObjectOutputStream;
  */
 public class SaveLoadSystem {
     
-//    public static void main(String[] args) {
-//        SaveLoadSystem sls = new SaveLoadSystem();
-//        PlayerProfile test = new PlayerProfile();
-//        sls.writeProfile(test);
-//        PlayerProfile loaded = sls.readProfile("test");
-//        System.out.println(loaded.getUsername());
-//        System.out.println(loaded.getPlayerParty()[0].getName());
-//        
-//    }
+    public static void main(String[] args) {
+        SaveLoadSystem sls = new SaveLoadSystem();
+        PlayerProfile test = new PlayerProfile();
+        sls.writeProfile(test);
+        PlayerProfile loaded = sls.readProfile("test");
+        System.out.println(loaded.getUsername());
+        System.out.println(loaded.getPlayerParty()[0].getName());
+        Minion testmin = loaded.getPlayerParty()[0];
+        testmin.levelUp();
+        System.out.println(testmin.getLevel());
+        
+        
+    }
     
     
     public void writeProfile(PlayerProfile profile) {

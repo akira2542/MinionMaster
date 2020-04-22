@@ -14,15 +14,14 @@ import java.io.Serializable;
 public abstract class Minion implements Serializable {
     
      // final stat
-    private final String name;
-    private final double basehealthpoint;
-    private final double basemanapoint;
-    private final double baseattackpoint;
-    private final double basearmor;
-    private final double baseevasion;
-    
-    //fixed size array final
-    private final double[] levelmultiplier = new double[5];
+    private static String name;
+    private static double BASEHP;
+    private static double BASEMP;
+    private static double BASEAP;
+    private static double BASEARMOR;
+    private static double BASEEVA;
+    private static double BASEACC;
+    private static LevelMultipiler MULT;
     
     //changeble stat
     private int position;
@@ -42,20 +41,22 @@ public abstract class Minion implements Serializable {
     private int[] equipmentgrade = new int[2]; 
     
     //contructor
-        public Minion(int position,String name,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double[] levelmultiplier) {
+        public Minion(int position,String Mname,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double baseaccuracy,LevelMultipiler mult) {
+        
+        MULT = mult;
+        BASEHP = basehelthpoint;
+        BASEMP = basemanapoint;
+        BASEAP = baseattackpoint;
+        BASEARMOR = basearmor;
+        BASEEVA = baseevasion;
+        BASEACC = baseaccuracy;
+        name = Mname;
         
         this.position = position;
-        this.name = name;
         this.level = 1;
         this.equipmentgrade[0] = 1;
         this.equipmentgrade[1] = 1;
         this.primarystatus = PrimaryStatus.ALIVE;
-        
-        this.basehealthpoint = basehelthpoint;
-        this.basemanapoint = basemanapoint;
-        this.baseattackpoint = baseattackpoint;
-        this.basearmor = basearmor;
-        this.baseevasion = baseevasion;
         
         this.maxhealthpoint = basehelthpoint;
         this.maxmanapoint = basehelthpoint;
@@ -66,8 +67,6 @@ public abstract class Minion implements Serializable {
         this.armor = basearmor;
         this.evasion = baseevasion;
         
-        System.arraycopy(levelmultiplier, 0, this.levelmultiplier, 0, this.levelmultiplier.length);
-        
     }
     
     
@@ -76,11 +75,11 @@ public abstract class Minion implements Serializable {
     public abstract void actionDecider(Minion[] ourpaty,Minion[] enemyparty);
     
     //preconfigured method
-    public void attackOn(Minion minion){
-        if (!minion.evasionCheck()){
+    protected void attackOn(Minion minion){
+        if (true){
                double deducteddamage = minion.armorCheck(this.getCalculatedAttackPoint());
                minion.setHealthpoint(minion.getHealthpoint()- deducteddamage);
-               System.out.println(this.name+"("+this.getPosition()+")"+" attacked "+minion.name+"("+minion.getPosition()+")"+" for "+deducteddamage+" damage");
+               System.out.println(this.getName()+"("+this.getPosition()+")"+" attacked "+minion.getName()+"("+minion.getPosition()+")"+" for "+deducteddamage+" damage");
                if (minion.getHealthpoint() <= 0) { 
                    minion.setPrimarystatus(PrimaryStatus.DEAD); 
                    System.out.println(minion.getName()+ "("+minion.getPosition()+")" + " is Dead!");
@@ -90,7 +89,11 @@ public abstract class Minion implements Serializable {
         }
     }
     
-    public void attackOn(Minion minion,int SkillDamage) {
+    protected void attackOn(Minion minion,int SkillDamage) {
+    }
+    
+    protected void receiveDamage(Double dmg) {
+        
     }
     
     protected boolean evasionCheck(double evasion,double accuracy) {
@@ -114,11 +117,11 @@ public abstract class Minion implements Serializable {
     }
     
     public void levelUp() {
-        this.maxhealthpoint *= this.levelmultiplier[0];
-        this.maxmanapoint *= this.levelmultiplier[1];
-        this.rawattackpoint *= this.levelmultiplier[2];
-        this.armor *= this.levelmultiplier[3];
-        this.evasion *= this.levelmultiplier[4];
+        this.maxhealthpoint *= MULT.getHP_MULT();
+        this.maxmanapoint *= MULT.getMP_MULT();
+        this.rawattackpoint *= MULT.getAP_MULT();
+        this.armor *= MULT.getARMOR_MULT();
+        this.evasion *= MULT.getEVA_MULT();
         this.refresh();
         this.level++;
     }
