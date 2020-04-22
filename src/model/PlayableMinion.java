@@ -9,29 +9,36 @@ package model;
  *
  * @author SURAPONGCHAMALAI
  */
-public abstract class PlayableMinion {
-    private long exppool;
+public abstract class PlayableMinion extends Minion{
+    
+    private static final long BASE_REQUIRED_EXP = 500;
+    private static final long PERCENT_INCREASE_PER_LEVEL = 40;
+    
+    private long XPpool;
+
+    public PlayableMinion(int position, String Mname, double basehelthpoint, double basemanapoint, double baseattackpoint, double basearmor, double baseevasion, double baseaccuracy, LevelMultipiler mult) {
+        super(position, Mname, basehelthpoint, basemanapoint, baseattackpoint, basearmor, baseevasion, baseaccuracy, mult);
+    }
     
     //คำนวณ exp
-    public int returnlvl(long exp){
+    public int calculateLevelByXP(long XP){
         //รับค่า exp มา
      
-        int lvl = 1;
-      long exppool = 500;
-     long i ;
+        int levelbyXP = 1;
+      long exppool = BASE_REQUIRED_EXP;
       // exppool = (exppool * 40)/100 + exppool;
-        for  (i = exppool; i < exp; i += i*40/100)
-          
-            if(exp<=500){
-                lvl = 1;
-            }else if(i>exp){
-                lvl = lvl-1;
+        for  (long minimumXP = exppool; minimumXP < XP; minimumXP += minimumXP*PERCENT_INCREASE_PER_LEVEL/100)
+            if( XP <= BASE_REQUIRED_EXP ){
+                levelbyXP = 1;
+            }else if(minimumXP>XP){
+                levelbyXP = levelbyXP-1;
             }else{
-                lvl = lvl+1;
-                System.out.println(lvl);
-                System.out.println(i);
+                levelbyXP++;
+                System.out.println(levelbyXP);
+                System.out.println(minimumXP);
             }
-        return lvl;
+        return levelbyXP;
     }
+    
     }
 

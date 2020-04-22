@@ -31,14 +31,14 @@ public abstract class Minion implements Serializable {
     private double healthpoint;
     private double manapoint;
     private double rawattackpoint;
-    private double armor;
+    private double rawarmor;
     private double evasion;
+    private double accuracy;
     private PrimaryStatus primarystatus;
     private SecondaryStatus secondarystatus;
+    private Equipment equipment; 
     
     
-    //fixed size array
-    private int[] equipmentgrade = new int[2]; 
     
     //contructor
         public Minion(int position,String Mname,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double baseaccuracy,LevelMultipiler mult) {
@@ -52,11 +52,11 @@ public abstract class Minion implements Serializable {
         BASEACC = baseaccuracy;
         name = Mname;
         
+        // new minnion will start with level 1 and common lv 1 equipment 
         this.position = position;
         this.level = 1;
-        this.equipmentgrade[0] = 1;
-        this.equipmentgrade[1] = 1;
         this.primarystatus = PrimaryStatus.ALIVE;
+        this.equipment = new Equipment();
         
         this.maxhealthpoint = basehelthpoint;
         this.maxmanapoint = basehelthpoint;
@@ -64,7 +64,7 @@ public abstract class Minion implements Serializable {
         this.healthpoint = basehelthpoint;
         this.manapoint = basemanapoint;
         this.rawattackpoint = baseattackpoint;
-        this.armor = basearmor;
+        this.rawarmor = basearmor;
         this.evasion = baseevasion;
         
     }
@@ -75,16 +75,16 @@ public abstract class Minion implements Serializable {
     public abstract void actionDecider(Minion[] ourpaty,Minion[] enemyparty);
     
     //preconfigured method
-    protected void attackOn(Minion minion){
-        if (true){
-               double deducteddamage = minion.armorCheck(this.getCalculatedAttackPoint());
-               minion.setHealthpoint(minion.getHealthpoint()- deducteddamage);
-               System.out.println(this.getName()+"("+this.getPosition()+")"+" attacked "+minion.getName()+"("+minion.getPosition()+")"+" for "+deducteddamage+" damage");
-               if (minion.getHealthpoint() <= 0) { 
-                   minion.setPrimarystatus(PrimaryStatus.DEAD); 
-                   System.out.println(minion.getName()+ "("+minion.getPosition()+")" + " is Dead!");
-                }
-        } else {
+    protected void attackOn(Minion enemie){
+        if (evasionCheck(this.accuracy)) {
+            double deductedDmg = enemie.armorCheck(enemie.getCalculatedAttackPoint());
+            enemie.healthpoint -= deductedDmg;
+            System.out.println(this.getName()+"("+this.getPosition()+")"+" attacked "+enemie.getName()+"("+enemie.getPosition()+")"+" Deals "+deductedDmg+" damage" + "reduce it helth to " + enemie.getHealthpoint());
+            if (enemie.getHealthpoint() <= 0) {
+                enemie.primarystatus = PrimaryStatus.DEAD;
+                System.out.println(enemie.name+"("+this.getPosition()+")"+" is Dead!");
+            }   
+        }else {
             System.out.println("Attack Missed!");
         }
     }
@@ -92,12 +92,8 @@ public abstract class Minion implements Serializable {
     protected void attackOn(Minion minion,int SkillDamage) {
     }
     
-    protected void receiveDamage(Double dmg) {
-        
-    }
-    
-    protected boolean evasionCheck(double evasion,double accuracy) {
-        double echance = (accuracy-evasion)/accuracy;
+    private boolean evasionCheck(double accuracy) {
+        double echance = (accuracy-this.evasion)/accuracy;
         boolean hit = false;
         for (int i = 0; i < 1; i++) {
             double rand = Math.random();
@@ -112,16 +108,17 @@ public abstract class Minion implements Serializable {
     }
     
     
-    protected double armorCheck(double attackpoint) {
-    return attackpoint;
+    private double armorCheck(double OpponentAP) {
+        return Math.round(OpponentAP - ((OpponentAP/100)*this.getCalculatedArmor()));
     }
     
     public void levelUp() {
         this.maxhealthpoint *= MULT.getHP_MULT();
         this.maxmanapoint *= MULT.getMP_MULT();
         this.rawattackpoint *= MULT.getAP_MULT();
-        this.armor *= MULT.getARMOR_MULT();
+        this.rawarmor *= MULT.getARMOR_MULT();
         this.evasion *= MULT.getEVA_MULT();
+        this.accuracy *= MULT.getACC_MULT();
         this.refresh();
         this.level++;
     }
@@ -135,9 +132,6 @@ public abstract class Minion implements Serializable {
         }
     }
     
-    public void setEquipmentgrade(int[] equipmentgrade) {
-        this.equipmentgrade = equipmentgrade;
-    }
 
     protected void setHealthpoint(Double healthpoint) {
         this.healthpoint = healthpoint;
@@ -159,9 +153,21 @@ public abstract class Minion implements Serializable {
     this.healthpoint = this.maxhealthpoint;
     this.manapoint = this.maxmanapoint;
     }
+
+    public double getAccuracy() {
+        return accuracy;
+    }
+    
+    
     
     public double getCalculatedAttackPoint() {
-    return this.rawattackpoint * (this.equipmentgrade[0] * 1.2);
+        //rawap*weapongrademultipiler
+    return this.rawattackpoint * (this.equipment.getEquipmentMultipiler(Equipment.WEAPON_INDEX));
+    }
+    
+    public double getCalculatedArmor() {
+        //rawarmor*armorgrade
+        return this.rawarmor* (this.equipment.getEquipmentMultipiler(Equipment.ARMOR_INDEX));
     }
     
     public int getPosition() {
@@ -176,9 +182,6 @@ public abstract class Minion implements Serializable {
         return level;
     }
 
-    public int[] getEquipmentgrade() {
-        return equipmentgrade;
-    }
 
     public Double getMaxhealthpoint() {
         return maxhealthpoint;
