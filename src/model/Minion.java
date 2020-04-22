@@ -31,7 +31,7 @@ public abstract class Minion implements Serializable {
     private double maxmanapoint;
     private double healthpoint;
     private double manapoint;
-    private double attackpoint;
+    private double rawattackpoint;
     private double armor;
     private double evasion;
     private PrimaryStatus primarystatus;
@@ -62,7 +62,7 @@ public abstract class Minion implements Serializable {
         
         this.healthpoint = basehelthpoint;
         this.manapoint = basemanapoint;
-        this.attackpoint = baseattackpoint;
+        this.rawattackpoint = baseattackpoint;
         this.armor = basearmor;
         this.evasion = baseevasion;
         
@@ -78,7 +78,7 @@ public abstract class Minion implements Serializable {
     //preconfigured method
     public void attackOn(Minion minion){
         if (!minion.evasionCheck()){
-               double deducteddamage = minion.armorCheck(this.attackpoint);
+               double deducteddamage = minion.armorCheck(this.getCalculatedAttackPoint());
                minion.setHealthpoint(minion.getHealthpoint()- deducteddamage);
                System.out.println(this.name+"("+this.getPosition()+")"+" attacked "+minion.name+"("+minion.getPosition()+")"+" for "+deducteddamage+" damage");
                if (minion.getHealthpoint() <= 0) { 
@@ -104,7 +104,7 @@ public abstract class Minion implements Serializable {
     public void levelUp() {
         this.maxhealthpoint *= this.levelmultiplier[0];
         this.maxmanapoint *= this.levelmultiplier[1];
-        this.attackpoint *= this.levelmultiplier[2];
+        this.rawattackpoint *= this.levelmultiplier[2];
         this.armor *= this.levelmultiplier[3];
         this.evasion *= this.levelmultiplier[4];
         this.refresh();
@@ -128,7 +128,7 @@ public abstract class Minion implements Serializable {
         this.healthpoint = healthpoint;
     }
 
-    private void setManapoint(Double manapoint) {
+    protected void setManapoint(Double manapoint) {
         this.manapoint = manapoint;
     }
 
@@ -145,6 +145,9 @@ public abstract class Minion implements Serializable {
     this.manapoint = this.maxmanapoint;
     }
     
+    public double getCalculatedAttackPoint() {
+    return this.rawattackpoint * (this.equipmentgrade[0] * 1.2);
+    }
     
     public int getPosition() {
     return position;
