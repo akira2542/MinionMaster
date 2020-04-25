@@ -133,7 +133,7 @@ public abstract class Minion implements Serializable {
     }
     
 
-    protected void setHealthpoint(Double healthpoint) {
+    public void setHealthpoint(Double healthpoint) {
         this.healthpoint = healthpoint;
     }
 

@@ -32,7 +32,12 @@ import model.PrimaryStatus;
     
     @Override
     protected void useSkillOn(Minion minion) {
+        if(this.getManapoint()>= 15){
         System.out.println(this.getName() + "had used Skill 'Heal'! on " + minion.getName());
+        this.setManapoint(this.getManapoint()-15);
+         minion.setHealthpoint(minion.getManapoint()+30);
+         
+        }
     }
 
    
@@ -43,8 +48,10 @@ import model.PrimaryStatus;
     public void actionDecider(Minion[] ourpaty, Minion[] enemyparty) {
  for (int i = 0; i < enemyparty.length; i++) {
             Minion minion = enemyparty[i];
-            if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
-              this.attackOn(minion);
+            Minion team   =  ourpaty[i];
+            if (team.getHealthpoint()<=50/100) {
+              this.useSkillOn(team);
+               
               break;
             }
         }    }

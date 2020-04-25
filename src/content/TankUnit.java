@@ -9,6 +9,7 @@ import model.LevelMultipiler;
 import model.Minion;
 import model.PlayableMinion;
 import model.PrimaryStatus;
+import model.SecondaryStatus;
 
 /**
  *
@@ -31,10 +32,10 @@ public class TankUnit extends PlayableMinion {
     
     @Override
     protected void useSkillOn(Minion minion) {
-        Minion tanker = new TankUnit(1) ;
-          if(this.getManapoint()>= 10){
+         if(this.getManapoint()>= 10){
            System.out.println(this.getName() + "had used Skill 'Stun'! on " + minion.getName());
-            
+            this.setManapoint(this.getManapoint()-10);
+             
         }
     }
 
