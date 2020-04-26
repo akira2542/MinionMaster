@@ -30,7 +30,10 @@ public class DpsUnit extends PlayableMinion {
     
     @Override
     protected void useSkillOn(Minion minion) {
-        System.out.println(this.getName() + "had used Skill '...'! on " + minion.getName());
+         if(this.getManapoint()>= 15){
+        System.out.println(this.getName() + "had used Skill 'Deal 80%of atk to all enemy'! on " + minion.getName());
+         this.setManapoint(this.getManapoint()-15);
+         }
     }
 
     @Override
