@@ -14,23 +14,26 @@ public abstract class PlayableMinion extends Minion{
     private static final long BASE_REQUIRED_EXP = 500;
     private static final long PERCENT_INCREASE_PER_LEVEL = 40;
     
+    
     private long XPpool;
+    private Minion next;
+    private Minion previous;
 
-    public PlayableMinion(int position, String Mname, double basehelthpoint, double basemanapoint, double baseattackpoint, double basearmor, double baseevasion, double baseaccuracy, LevelMultipiler mult) {
-        super(position, Mname, basehelthpoint, basemanapoint, baseattackpoint, basearmor, baseevasion, baseaccuracy, mult);
+    public PlayableMinion(String Mname, double basehelthpoint, double basemanapoint, double baseattackpoint, double basearmor, double baseevasion, double baseaccuracy, LevelMultipiler mult) {
+        super(Mname, basehelthpoint, basemanapoint, baseattackpoint, basearmor, baseevasion, baseaccuracy, mult);
     }
     
     //คำนวณ exp
-    public int calculateLevelByXP(long XP){
+    public static int calculateLevelByXP(long XP){
         //รับค่า exp มา
      
         int levelbyXP = 1;
       long exppool = BASE_REQUIRED_EXP;
       // exppool = (exppool * 40)/100 + exppool;
-        for  (long minimumXP = exppool; minimumXP < XP; minimumXP += minimumXP*PERCENT_INCREASE_PER_LEVEL/100)
+        for  (long maximumXP = exppool; maximumXP < XP; maximumXP += maximumXP*PERCENT_INCREASE_PER_LEVEL/100)
             if( XP <= BASE_REQUIRED_EXP ){
                 levelbyXP = 1;
-            }else if(minimumXP>XP){
+            }else if(maximumXP>XP){
                 levelbyXP = levelbyXP-1;
             }else{
                 levelbyXP++;
@@ -38,7 +41,7 @@ public abstract class PlayableMinion extends Minion{
         return levelbyXP;
     }
     
-    public long calculateXPByLevel(int level) {
+    public static long calculateXPByLevel(int level) {
         if (level == 1) return BASE_REQUIRED_EXP;
         long XP = BASE_REQUIRED_EXP;
         for (int i = 1 ; i < level; i++) {
@@ -46,6 +49,57 @@ public abstract class PlayableMinion extends Minion{
         }
         return XP;
     }
+
+    public long getXPpool() {
+        return XPpool;
+    }
+    
+    //share xp function using linked list recursively
+    private void shareXP(long xp) {
+        long distributedXP = (long) Math.round((xp/100) * 1.25);
+        this.XPpool += distributedXP;
+        if (this.next instanceof PlayableMinion && this.next != null) {
+            PlayableMinion nextminion = (PlayableMinion) this.next;
+            nextminion.shareXPNext(xp);
+        }
+        if (this.previous instanceof PlayableMinion && this.previous != null) {
+            PlayableMinion nextminion = (PlayableMinion) this.previous;
+            nextminion.shareXPNext(xp);
+        }
+    }
+    
+    public void shareXPNext(long xp) {
+        this.XPpool += xp;
+        if (this.next instanceof PlayableMinion  && this.next != null) {
+            PlayableMinion nextminion = (PlayableMinion) this.next;
+            nextminion.shareXPNext(xp);
+        }
+    }
+    
+    public void shareXPPrevious(long xp) {
+        this.XPpool += xp;
+        if (this.previous instanceof PlayableMinion  && this.previous != null) {
+            PlayableMinion previousminion = (PlayableMinion) this.previous;
+            previousminion.shareXPNext(xp);
+        }
+    }
+    
+    @Override
+    public void attackOn(Minion enemy) {
+    super.attackOn(enemy);
+        if (enemy.getPrimarystatus() == PrimaryStatus.DEAD) {
+        }
+        //share xp to party member
+        this.shareXP(PlayableMinion.calculateXPByLevel(enemy.getLevel()));
+    }
+
+    public void setNext(Minion next) {
+        this.next = next;
+    }
+
+    public void setPrevious(Minion previous) {
+        this.previous = previous;
+    }    
     
     
     }

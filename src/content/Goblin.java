@@ -25,8 +25,8 @@ public class Goblin extends Minion{
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
 //    skill = will attack harder if hp below 10%    
     
-    public Goblin(int position) {
-    super(position,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
+    public Goblin() {
+    super(DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
     }
     
     @Override

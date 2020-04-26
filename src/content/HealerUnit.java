@@ -26,8 +26,8 @@ import model.PrimaryStatus;
       private static final double BASE_ACC = 5;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
 //    skill = Heal
-    public HealerUnit(int position) {
-    super(position,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
+    public HealerUnit() {
+    super(DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
     }
     
     @Override

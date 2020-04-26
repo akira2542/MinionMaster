@@ -41,7 +41,7 @@ public abstract class Minion implements Serializable {
     
     
     //contructor
-        public Minion(int position,String Mname,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double baseaccuracy,LevelMultipiler mult) {
+        public Minion(String Mname,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double baseaccuracy,LevelMultipiler mult) {
         
         MULT = mult;
         BASEHP = basehelthpoint;
@@ -53,7 +53,6 @@ public abstract class Minion implements Serializable {
         name = Mname;
         
         // new minnion will start with level 1 and common lv 1 equipment 
-        this.position = position;
         this.level = 1;
         this.primarystatus = PrimaryStatus.ALIVE;
         this.equipment = new Equipment();
@@ -75,14 +74,14 @@ public abstract class Minion implements Serializable {
     public abstract void actionDecider(Minion[] ourpaty,Minion[] enemyparty);
     
     //preconfigured method
-    protected void attackOn(Minion enemie){
+    protected void attackOn(Minion enemy){
         if (evasionCheck(this.accuracy)) {
-            double deductedDmg = enemie.armorCheck(enemie.getCalculatedAttackPoint());
-            enemie.healthpoint -= deductedDmg;
-            System.out.println(this.getName()+"("+this.getPosition()+")"+" attacked "+enemie.getName()+"("+enemie.getPosition()+")"+" Deals "+deductedDmg+" damage" + "reduce it helth to " + enemie.getHealthpoint());
-            if (enemie.getHealthpoint() <= 0) {
-                enemie.primarystatus = PrimaryStatus.DEAD;
-                System.out.println(enemie.name+"("+this.getPosition()+")"+" is Dead!");
+            double deductedDmg = enemy.armorCheck(enemy.getCalculatedAttackPoint());
+            enemy.healthpoint -= deductedDmg;
+            System.out.println(this.getName()+"("+this.getPosition()+")"+" attacked "+enemy.getName()+"("+enemy.getPosition()+")"+" Deals "+deductedDmg+" damage" + "reduce it helth to " + enemy.getHealthpoint());
+            if (enemy.getHealthpoint() <= 0) {
+                enemy.primarystatus = PrimaryStatus.DEAD;
+                System.out.println(enemy.name+"("+this.getPosition()+")"+" is Dead!");
             }   
         }else {
             System.out.println("Attack Missed!");

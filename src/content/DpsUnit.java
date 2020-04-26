@@ -24,8 +24,8 @@ public class DpsUnit extends PlayableMinion {
       private static final double BASE_ACC =  15;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
 //    skill = Stun
-    public DpsUnit(int position) {
-    super(position,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
+    public DpsUnit() {
+    super(DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
     }
     
     @Override

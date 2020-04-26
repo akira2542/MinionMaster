@@ -20,11 +20,11 @@ public class Dungeon {
       public static void main(String[] args) {
         Minion[] p1 = new Minion[4];
         for (int i = 0; i < p1.length; i++) {
-            p1[i] = new Goblin(i);
+            p1[i] = new Goblin();
         }
          Minion[] p2 = new Minion[4];
         for (int i = 0; i < p2.length; i++) {
-            p2[i] = new Goblin(i);
+            p2[i] = new Goblin();
         }
         BattleField[] test = new BattleField[2];
         test[0] = new BattleField(p1);
