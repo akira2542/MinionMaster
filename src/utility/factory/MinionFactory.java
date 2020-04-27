@@ -13,6 +13,7 @@ import content.minion.Orc;
 import content.playableminon.Knight;
 import content.playableminon.Preist;
 import content.playableminon.Thief;
+import model.ClassIndex;
 import model.Equipment;
 import model.EquipmentGrade;
 import model.Minion;
@@ -24,24 +25,17 @@ import model.PlayableMinion;
  */
 public class MinionFactory {
     
-    public static final int KNIGHT = 101;
-    public static final int PREIST = 102;
-    public static final int DUELIST = 103;
-    public static final int THIEF = 104;
     
-    
-    public static final int GOBLIN = 201;
-    public static final int ORC = 202;
     
     public static Minion createPlayableMinion(int classIndex) {
         switch(classIndex) {
-            case KNIGHT:
+            case ClassIndex.KNIGHT_INDEX:
                 return new Knight();
-            case PREIST:
+            case ClassIndex.PREIST_INDEX:
                 return new Preist();
-            case DUELIST:
+            case ClassIndex.DUELIST_INDEX:
                 return new Duelist();
-            case THIEF:
+            case ClassIndex.THIEF_INDEX:
                 return new Thief();
             default:
                 return null;
@@ -60,9 +54,9 @@ public class MinionFactory {
     
     public static Minion createMinion(int classIndex) {
                 switch(classIndex) {
-            case GOBLIN:
+            case ClassIndex.GOBLIN_INDEX:
                 return new Goblin();
-            case ORC:
+            case ClassIndex.ORC_INDEX:
                 return new Orc();
             default:
                 return null;

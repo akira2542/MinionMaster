@@ -29,12 +29,7 @@ public class LevelMultipiler implements Serializable {
     }
     
     public LevelMultipiler(Double all) {
-        HP_MULT = all;
-        MP_MULT = all;
-        AP_MULT = all;
-        ARMOR_MULT = all;
-        EVA_MULT = all;
-        ACC_MULT = all;
+        this(all,all,all,all,all,all);
     }
 
     public double getHP_MULT() {

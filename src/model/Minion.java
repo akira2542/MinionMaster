@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public abstract class Minion implements Serializable {
     
-     // final stat
+     // static stat
     private static String name;
     private static double BASEHP;
     private static double BASEMP;
@@ -22,6 +22,7 @@ public abstract class Minion implements Serializable {
     private static double BASEEVA;
     private static double BASEACC;
     private static LevelMultipiler MULT;
+    private static int CLASS_INDEX;
     
     //changeble stat
     private int position;
@@ -41,8 +42,9 @@ public abstract class Minion implements Serializable {
     
     
     //contructor
-        public Minion(String Mname,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double baseaccuracy,LevelMultipiler mult) {
+        public Minion(int index,String Mname,double basehelthpoint, double basemanapoint,double baseattackpoint,double basearmor, double baseevasion,double baseaccuracy,LevelMultipiler mult) {
         
+        CLASS_INDEX = index;    
         MULT = mult;
         BASEHP = basehelthpoint;
         BASEMP = basemanapoint;
@@ -206,6 +208,10 @@ public abstract class Minion implements Serializable {
 
     public Equipment getEquipment() {
         return equipment;
+    }
+
+    public static int getCLASS_INDEX() {
+        return CLASS_INDEX;
     }
     
     

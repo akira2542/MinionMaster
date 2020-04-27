@@ -19,8 +19,8 @@ public abstract class PlayableMinion extends Minion{
     private Minion next;
     private Minion previous;
 
-    public PlayableMinion(String Mname, double basehelthpoint, double basemanapoint, double baseattackpoint, double basearmor, double baseevasion, double baseaccuracy, LevelMultipiler mult) {
-        super(Mname, basehelthpoint, basemanapoint, baseattackpoint, basearmor, baseevasion, baseaccuracy, mult);
+    public PlayableMinion(int index,String Mname, double basehelthpoint, double basemanapoint, double baseattackpoint, double basearmor, double baseevasion, double baseaccuracy, LevelMultipiler mult) {
+        super(index,Mname, basehelthpoint, basemanapoint, baseattackpoint, basearmor, baseevasion, baseaccuracy, mult);
     }
     
     //คำนวณ exp

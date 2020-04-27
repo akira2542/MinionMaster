@@ -23,10 +23,11 @@ public class Orc extends Minion{
       private static final double BASE_EVASION = 0;
       private static final double BASE_ACC = 10;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
+      private static final int CLASS_INDEX = 202;
 //    skill = will attack harder if hp below 10%    
     
     public Orc() {
-    super(DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
+    super(CLASS_INDEX,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
     }
     
     @Override

@@ -25,9 +25,10 @@ import model.PrimaryStatus;
       private static final double BASE_EVASION = 5;
       private static final double BASE_ACC = 5;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
+      private static final int CLASS_INDEX = 102;
 //    skill = Heal
     public Preist() {
-    super(DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
+    super(CLASS_INDEX,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
     }
     
     @Override

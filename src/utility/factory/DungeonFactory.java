@@ -9,6 +9,7 @@ import utility.factory.MinionFactory;
 import core.Battlefield;
 import core.Dungeon;
 import java.util.Random;
+import model.ClassIndex;
 import model.Minion;
 
 /**
@@ -55,7 +56,7 @@ public class DungeonFactory {
             for (int i = 0; i < bats.length ; i++) {
                 Minion[] minions = new Minion[4];
                 for (int j = 0; j < minions.length; j++) {
-                   int classindex = randomBetweenNum(MinionFactory.GOBLIN,MinionFactory.ORC);
+                   int classindex = randomBetweenNum(ClassIndex.GOBLIN_INDEX,ClassIndex.ORC_INDEX);
                    int level = randomWithDeviation(levelrange,RANGE_DEVIATION);
                    minions[j] = MinionFactory.createMinion(classindex,level);
                 }

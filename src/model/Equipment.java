@@ -116,36 +116,93 @@ public class Equipment implements Serializable {
                         break;
             }
             return incrementedgrade;
-    }    
+    }
+
+    public static int getTokenUpgradePrice(EquipmentGrade grade) {
+            switch(grade) {
+                        case COMMON: 
+                            return EquipmentGrade.UNCOMMON_TOKEN_NEEDED;
+                        case UNCOMMON:
+                            return EquipmentGrade.RARE_TOKEN_NEEDED;
+                        case RARE:
+                            return EquipmentGrade.EPIC_TOKEN_NEEDED;
+                        case EPIC:
+                            return EquipmentGrade.LEGENDARY_TOKEN_NEEDED;
+                        case LEGENDARY:
+                            return EquipmentGrade.MYTHIC_TOKEN_NEEDED;
+                        case MYTHIC:
+                            return 0;
+                        default:
+                            return -1;    
+            }
+    }
+
+    public static int getEquipmentGradeIndex(EquipmentGrade grade) {
+                        switch(grade) {
+                        case COMMON: 
+                            return EquipmentGrade.COMMON_INDEX;
+                        case UNCOMMON:
+                            return EquipmentGrade.UNCOMMON_INDEX;
+                        case RARE:
+                            return EquipmentGrade.RARE_INDEX;
+                        case EPIC:
+                            return EquipmentGrade.EPIC_INDEX;
+                        case LEGENDARY:
+                            return EquipmentGrade.LEGENDARY_INDEX;
+                        case MYTHIC:
+                            return EquipmentGrade.MYTHIC_INDEX;
+                        default:
+                            return -1;    
+            }
+    }
+    
+        public static EquipmentGrade getEquipmentGrade(int index) {
+                        switch(index) {
+                        case 1: 
+                            return EquipmentGrade.COMMON;
+                        case 2:
+                            return EquipmentGrade.UNCOMMON;
+                        case 3:
+                            return EquipmentGrade.RARE;
+                        case 4:
+                            return EquipmentGrade.EPIC;
+                        case 5:
+                            return EquipmentGrade.LEGENDARY;
+                        case 6:
+                            return EquipmentGrade.MYTHIC;
+                        default:
+                            return null;    
+            }
+    }
                
     public static long getIncreaseEquipmentLevelPrice(int equipmentlevel,EquipmentGrade grade) {
         long price = 0;
     if (equipmentlevel < MAX_EQUIPMENT_LEVEL) {
             switch(grade) {
                         case COMMON: 
-                          price = this.calculateUpgradePrice(equipmentlevel, EquipmentGrade.COMMON_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.COMMON_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
                         case UNCOMMON:
-                          price = this.calculateUpgradePrice(equipmentlevel, EquipmentGrade.UNCOMMON_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.UNCOMMON_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
                         break;
                         case RARE:
-                          price = this.calculateUpgradePrice(equipmentlevel, EquipmentGrade.RARE_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.RARE_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
                         break;
                         case EPIC:
-                          price = this.calculateUpgradePrice(equipmentlevel, EquipmentGrade.EPIC_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.EPIC_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
                         case LEGENDARY:
-                          price = this.calculateUpgradePrice(equipmentlevel, EquipmentGrade.LEGENDARY_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.LEGENDARY_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
                         case MYTHIC:
-                          price = this.calculateUpgradePrice(equipmentlevel, EquipmentGrade.MYTHIC_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.MYTHIC_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
             }
         }
     return price;
     }
     
-    private long calculateUpgradePrice(int equipmentlevel,int gradeCost,double multipiler) {
+    private static long calculateUpgradePrice(int equipmentlevel,int gradeCost,double multipiler) {
         double price = (double) gradeCost;
         for (int i = equipmentlevel; i > 1; i--) {
             price *= multipiler;
