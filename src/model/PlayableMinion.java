@@ -101,6 +101,9 @@ public abstract class PlayableMinion extends Minion{
         this.previous = previous;
     }    
     
+    public void receiveXP(long xp) {
+    this.XPpool += xp;
+    }
     
     }
 

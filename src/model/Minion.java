@@ -96,12 +96,7 @@ public abstract class Minion implements Serializable {
         boolean hit = false;
         for (int i = 0; i < 1; i++) {
             double rand = Math.random();
-              String.format("value is %.1f", rand) ;  
-            if(rand<=echance){
-                System.out.println("attack miss");
-                hit = false;
-            }else {System.out.println("attack hit");
-            hit = true;}
+              hit = rand > echance;
         }
         return hit;
     }
@@ -131,6 +126,9 @@ public abstract class Minion implements Serializable {
         }
     }
     
+    public void setEquipment(Equipment equipment) {
+     this.equipment = equipment;   
+    }    
 
     public void setHealthpoint(Double healthpoint) {
         this.healthpoint = healthpoint;
@@ -205,5 +203,10 @@ public abstract class Minion implements Serializable {
     public SecondaryStatus getSecondarystatus() {
         return secondarystatus;
     }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+    
     
 }

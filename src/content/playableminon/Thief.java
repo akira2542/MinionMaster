@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package content;
+package content.playableminon;
 
 import model.LevelMultipiler;
 import model.Minion;
@@ -14,7 +14,7 @@ import model.PrimaryStatus;
  *
  * @author SURAPONGCHAMALAI
  */
-public class ThiefUnit extends PlayableMinion {
+public class Thief extends PlayableMinion {
 
     private static final String DEFAULT_NAME = "Assassin";
     private static final double BASE_HEALTPOINT = 25;
@@ -26,7 +26,7 @@ public class ThiefUnit extends PlayableMinion {
     private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
 //    skill = ??
 
-    public ThiefUnit() {
+    public Thief() {
         super(DEFAULT_NAME, BASE_HEALTPOINT, BASE_MANA, BASE_AP, BASE_ARMOR, BASE_EVASION, BASE_ACC, MULT);
     }
 

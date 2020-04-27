@@ -12,11 +12,11 @@ import model.PrimaryStatus;
  *
  * @author COM
  */
-public class BattleField {
+public class Battlefield {
     Minion[] localParty;
     int turncounter;
         
-    public BattleField(Minion[] localParty){
+    public Battlefield(Minion[] localParty){
          this.localParty = localParty;
     }
    

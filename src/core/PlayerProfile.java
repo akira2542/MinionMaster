@@ -1,6 +1,6 @@
 package core;
 
-import content.Goblin;
+import content.minion.Goblin;
 import java.io.Serializable;
 import model.Minion;
 
@@ -35,6 +35,10 @@ public class PlayerProfile implements Serializable {
     
     public Minion[] getPlayerParty() {
     return this.playerParty;
+    }
+    
+    public void setPlayerParty(Minion[] minions) {
+    this.playerParty = minions;
     }
     
     public void receiveGold(long gold) {

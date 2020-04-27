@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package utility;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -15,12 +15,12 @@ import java.util.concurrent.TimeUnit;
 public class TimeStopper {
 
     
-    public void Delay() {
+    public static void Delay(int sec) {
         try {
 
             System.out.println("Delay 1 sec");
 
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(sec);
             System.out.println("Finish...");
 
         } catch (InterruptedException e) {
@@ -28,8 +28,11 @@ public class TimeStopper {
         }
 
     }
+    public static void Delay() {
+            Delay(1);
+    }
 
-    public void userInput() {
+    public static void userInput() {
         Scanner uInput = new Scanner(System.in);
         String enterkey = "Press Enter";
         System.out.println(enterkey);

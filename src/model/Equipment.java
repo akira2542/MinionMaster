@@ -30,6 +30,13 @@ public class Equipment implements Serializable {
         this.armorlv = 1;
     }
     
+    public Equipment(int weaponlevel,EquipmentGrade weapongrade,int armorlevel,EquipmentGrade armorgrade) {
+        this.weaponGrade = weapongrade;
+        this.armorGrade = armorgrade;
+        this.weaponlv = weaponlevel;
+        this.armorlv = armorlevel;
+    }
+    
     public double getEquipmentMultipiler(int index) {
         double mult = 1;
         if (index == WEAPON_INDEX) {
@@ -111,7 +118,7 @@ public class Equipment implements Serializable {
             return incrementedgrade;
     }    
                
-    public long getIncreaseEquipmentLevelPrice(int equipmentlevel,EquipmentGrade grade) {
+    public static long getIncreaseEquipmentLevelPrice(int equipmentlevel,EquipmentGrade grade) {
         long price = 0;
     if (equipmentlevel < MAX_EQUIPMENT_LEVEL) {
             switch(grade) {
