@@ -48,14 +48,18 @@ public class Interface {
         System.out.println("1 = Weapon");
         System.out.println("2 = Armor");
         int num = Scan.nextInt();
-        
+         Equipment e = new Equipment();
             if (num == 1) {
                 System.out.println("Equipment = Weapon " );
+                Equipment.getIncreaseEquipmentLevelPrice(e.getWeaponlv(), e.getWeaponGrade());
             }if(num == 2){
                 System.out.println("Equipment = Armor " );
+                Equipment.getIncreaseEquipmentLevelPrice(e.getArmorlv(), e.getArmorGrade());
             }else{
                 System.out.println("Wrong input");
             }
+           
+            
         }
    
 
