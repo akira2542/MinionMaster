@@ -14,7 +14,7 @@ public enum ClassIndex {
     
     private final int index;
     public static final int KNIGHT_INDEX = 101;
-    public static final int PREIST_INDEX = 102;
+    public static final int PRIEST_INDEX = 102;
     public static final int DUELIST_INDEX = 103;
     public static final int THIEF_INDEX = 104;
    

@@ -13,7 +13,6 @@ import content.minion.Orc;
 import content.playableminon.Knight;
 import content.playableminon.Priest;
 import content.playableminon.Thief;
-import java.util.Objects;
 import model.ClassIndex;
 import model.Equipment;
 import model.EquipmentGrade;
@@ -32,7 +31,7 @@ public class MinionFactory {
         switch(classIndex) {
             case ClassIndex.KNIGHT_INDEX:
                 return new Knight();
-            case ClassIndex.PREIST_INDEX:
+            case ClassIndex.PRIEST_INDEX:
                 return new Priest();
             case ClassIndex.DUELIST_INDEX:
                 return new Duelist();
