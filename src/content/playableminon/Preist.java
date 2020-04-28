@@ -18,7 +18,7 @@ import model.PrimaryStatus;
 
     public class Preist extends PlayableMinion {
       
-      private static final String DEFAULT_NAME = "Healer";
+      private static final String DEFAULT_NAME = "Priest";
       private static final double BASE_HEALTPOINT = 30; 
       private static final double BASE_MANA = 30;
       private static final double BASE_AP = 15;

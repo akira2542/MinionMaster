@@ -37,20 +37,25 @@ public class DungeonFactory {
         private static final int HARD_LENGTH = 15;
         private static final double HARD_REWARD_MULTIPILER = 1.5;
         
+        
+        public static void main(String[] args) {
+        Dungeon d = DungeonFactory.createDungeon(EASY_INDEX);
+    }
+        
         public static Dungeon createDungeon(int index) {
             switch (index) {
                 case EASY_INDEX:
-                    return assembleDungeon(EASY_RANGE,EASY_LENGTH,EASY_REWARD_MULTIPILER);
+                    return assembleDungeon(EASY_RANGE,EASY_LENGTH,EASY_REWARD_MULTIPILER,EASY_INDEX);
                 case MEDIUM_INDEX:
-                    return assembleDungeon(MEDIUM_RANGE,MEDIUM_LENGTH,MEDIUM_REWARD_MULTIPILER);
+                    return assembleDungeon(MEDIUM_RANGE,MEDIUM_LENGTH,MEDIUM_REWARD_MULTIPILER,MEDIUM_INDEX);
                 case HARD_INDEX:
-                    return assembleDungeon(HARD_RANGE,HARD_LENGTH,HARD_REWARD_MULTIPILER);
+                    return assembleDungeon(HARD_RANGE,HARD_LENGTH,HARD_REWARD_MULTIPILER,HARD_INDEX);
             default:
                 return null;
             }
         }
         
-        private static Dungeon assembleDungeon(int levelrange,int length,double rewardMult) {
+        private static Dungeon assembleDungeon(int levelrange,int length,double rewardMult,int token) {
             int ranlength = randomWithDeviation(length,LENGTH_DEVIATION);
             Battlefield[] bats = new Battlefield[ranlength];
             for (int i = 0; i < bats.length ; i++) {
@@ -64,10 +69,11 @@ public class DungeonFactory {
             }
             long reward = Math.round(ranlength*(BASE_REWARD*rewardMult));
             long score = reward;
-            return new Dungeon(bats,reward,score);
+            return new Dungeon(bats,reward,score,token);
         }
         
-        private static int randomBetweenNum(int high,int low) {
+        private static int randomBetweenNum(int low,int high) {
+            //throw exception here
              Random r = new Random();
              return r.nextInt(high-low) + low;
         }

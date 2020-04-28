@@ -18,7 +18,7 @@ import model.SecondaryStatus;
  */
 public class Knight extends PlayableMinion {
       
-      private static final String DEFAULT_NAME = "Tanker";
+      private static final String DEFAULT_NAME = "Knight";
       private static final double BASE_HEALTPOINT = 40; 
       private static final double BASE_MANA = 20;
       private static final double BASE_AP = 20;

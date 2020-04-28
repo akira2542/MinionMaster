@@ -16,7 +16,7 @@ import model.PrimaryStatus;
  */
 public class Orc extends Minion{
         
-      private static final String DEFAULT_NAME = "Goblin";
+      private static final String DEFAULT_NAME = "Orc";
       private static final double BASE_HEALTPOINT = 20; 
       private static final double BASE_MANA = 5;
       private static final double BASE_AP = 3;

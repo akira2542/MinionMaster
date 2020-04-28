@@ -14,9 +14,10 @@ import model.Minion;
  */
 public class Dungeon {
     
-  private  Battlefield[]  battleFields;//ห้องที่สู้อยู่
-  private  long reward;//ของรางวัลเช่น จำนวนเงิน
-  private  long clearscore;
+  private Battlefield[]  battleFields;//ห้องที่สู้อยู่
+  private long reward;//ของรางวัลเช่น จำนวนเงิน
+  private long clearscore;
+  private int token; 
   
 //      public static void main(String[] args) {
 //        Minion[] p1 = new Minion[4];
@@ -36,10 +37,12 @@ public class Dungeon {
 //        
 //    }
   
-  public Dungeon(Battlefield[] battleFields,long reward,long score) {
+  
+  public Dungeon(Battlefield[] battleFields,long reward,long score,int token) {
       this.battleFields = battleFields;
       this.reward = reward;
       this.clearscore = score;
+      this.token = token;
   }
   
   public void enter(PlayerProfile profile){
@@ -55,6 +58,7 @@ public class Dungeon {
                   System.out.println("Player recieve reward of " +this.reward+ " gold!");
                   profile.receiveGold(this.reward);
                   profile.receiveScore(this.clearscore);
+                  profile.receiveToken(this.token);
               }
           }else{ 
               System.out.println("Player's Party Defeated");

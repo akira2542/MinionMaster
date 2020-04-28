@@ -17,10 +17,11 @@ import model.Minion;
  */
 public class PlayerProfile implements Serializable {
     
-    private final String Username;
+    private final String username;
     private Minion[] playerParty;
     private long gold;
     private long score;
+    private int token;
   
     
     public PlayerProfile() {
@@ -29,9 +30,14 @@ public class PlayerProfile implements Serializable {
         for (int i = 0; i < playerParty.length; i++) {
             playerParty[i] = new Knight();
         }
-        this.Username = "test";
+        this.username = "test";
         this.gold = 850;
         this.score = 950;
+        this.token = 5;
+    }
+    
+    public PlayerProfile(String username) {
+    this.username = username;
     }
     
     public Minion[] getPlayerParty() {
@@ -49,9 +55,13 @@ public class PlayerProfile implements Serializable {
     public void receiveScore(long score) {
         this.score += score;
     }
+    
+    public void receiveToken(int token) {
+        
+    }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public long getGold() {
@@ -60,6 +70,15 @@ public class PlayerProfile implements Serializable {
 
     public long getScore() {
         return score;
+    }
+
+    public int getToken() {
+        return token;
+    }
+ 
+    @Override
+    public String toString() {
+        return "PlayerProfile{" + "username=" + username + ", playerParty=" + playerParty + ", gold=" + gold + ", score=" + score + '}';
     }
     
     

@@ -13,6 +13,7 @@ import content.minion.Orc;
 import content.playableminon.Knight;
 import content.playableminon.Preist;
 import content.playableminon.Thief;
+import java.util.Objects;
 import model.ClassIndex;
 import model.Equipment;
 import model.EquipmentGrade;

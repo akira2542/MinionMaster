@@ -14,9 +14,11 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Equipment;
+import model.EquipmentGrade;
 import model.Minion;
 import model.PlayableMinion;
 import utility.JDBC.DBConnector;
+import utility.factory.MinionFactory;
 
 /**
  *
@@ -27,8 +29,12 @@ public class CloudSaveSystem {
     public static final String TABLE_NAME = "userprofile";
     
     public static void main(String[] args) {
-//        CloudSaveSystem cs = new CloudSaveSystem();
-        PlayerProfile p = new PlayerProfile();
+        CloudSaveSystem cs = new CloudSaveSystem();
+        PlayerProfile cp = cs.readProfile("test","123");
+        Minion[] m = cp.getPlayerParty();
+        
+        
+//        PlayerProfile p = new PlayerProfile();
 //        cs.insertProfile(p, "123");
     }
     
@@ -44,20 +50,21 @@ public class CloudSaveSystem {
     
     public void insertProfile(PlayerProfile profile, String password) {
 //          String hashedpwd = password.hashCode();
-          String sql =  "INSERT INTO userprofile(usr,pwd,gold,score"+
+          String sql =  "INSERT INTO userprofile(usr,pwd,gold,score,token"+
                   ",char_classindex_0,char_xp_0,char_wep_lv_0,char_wep_grade_0,char_ar_lv_0,char_ar_grade_0,"+
                   "char_classindex_1,char_xp_1,char_wep_lv_1,char_wep_grade_1,char_ar_lv_1,char_ar_grade_1,"+
                   "char_classindex_2,char_xp_2,char_wep_lv_2,char_wep_grade_2,char_ar_lv_2,char_ar_grade_2,"+
                   "char_classindex_3,char_xp_3,char_wep_lv_3,char_wep_grade_3,char_ar_lv_3,char_ar_grade_3)"+
-                  " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                  " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
           try (Connection conn = DBConnector.getConnection();
                PreparedStatement pstm = conn.prepareStatement(sql)) {
                pstm.setString(1, profile.getUsername());
                pstm.setString(2, password);
                pstm.setInt(3, (int) profile.getGold());
                pstm.setInt(4, (int) profile.getScore());
+               pstm.setInt(5, profile.getToken());
                Minion[] minions = profile.getPlayerParty();
-               for (int i = 5; i < 29; ) {
+               for (int i = 6; i < 30; ) {
                    for (int j = 0; j < minions.length; j++) {
                        PlayableMinion m = (PlayableMinion) minions[j];
                        pstm.setInt(i++, m.getCLASS_INDEX());
@@ -73,17 +80,31 @@ public class CloudSaveSystem {
           catch (SQLException ex) {
             Logger.getLogger(CloudSaveSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
+          
     }
     
-    public Minion readProfile(String user,String password){
-        String sql = "SELECT * FROM "+TABLE_NAME+" WHERE usr like "+user;
+    public PlayerProfile readProfile(String user,String password){
+        String sql = "SELECT * FROM "+TABLE_NAME+" WHERE usr like '"+user+"'";
         try (Connection conn = DBConnector.getConnection()) {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()) {
-                if (rs.getString("pwd") == password) {
+                if (rs.getString("pwd").equals(password)) {
+                    PlayerProfile profile = new PlayerProfile(rs.getString("usr"));
+                    Minion[] minions = new Minion[4];
+                    profile.receiveGold(rs.getInt("gold"));
+                    profile.receiveScore(rs.getInt("score"));
+                    profile.receiveToken(rs.getInt("token"));
+                    for (int i = 0; i < minions.length; i++) {
+                        minions[i] = MinionFactory.createPlayableMinion(rs.getInt("char_classindex_"+i), rs.getInt("char_xp_"+i),rs.getInt("char_wep_lv_"+i) , Equipment.getEquipmentGrade(rs.getInt("char_wep_grade_"+i)), rs.getInt("char_ar_lv_"+i), Equipment.getEquipmentGrade(rs.getInt("char_ar_grade_"+i)));
+
+                    }
+                    profile.setPlayerParty(minions);
+                    return profile;
                     
-                }else
+                }else{
+                    System.out.println("incorect password");
+                }
             }       
         return null;
        } catch (SQLException ex) {
@@ -110,6 +131,7 @@ public class CloudSaveSystem {
 "                   				pwd varchar(255) NOT NULL," +
 "                   				gold int(255) NOT NULL," +
 "                   				score int(255) NOT NULL," +
+"                                               token int(255) NOT NULL"+
 "                   				char_classindex_0 SMALLINT NOT NULL," +
 "                   				char_xp_0 INT(255) NOT NULL," +
 "                   				char_wep_lv_0 SMALLINT NOT NULL," +
@@ -144,9 +166,6 @@ public class CloudSaveSystem {
         return false;
     }
     
-    public PlayerProfile loadProfile(String username,String password) {
-        return null;
-    }
     
 //    public getLeaderBoard(){
 //    

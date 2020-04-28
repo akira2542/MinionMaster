@@ -16,7 +16,7 @@ import model.PrimaryStatus;
  * @author SURAPONGCHAMALAI
  */
 public class Duelist extends PlayableMinion {
-    private static final String DEFAULT_NAME = "Ranger";
+    private static final String DEFAULT_NAME = "Duelist";
       private static final double BASE_HEALTPOINT = 25; 
       private static final double BASE_MANA = 20;
       private static final double BASE_AP = 30;

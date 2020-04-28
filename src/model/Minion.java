@@ -212,6 +212,11 @@ public abstract class Minion implements Serializable {
     public int getCLASS_INDEX() {
         return CLASS_INDEX;
     }
+
+    @Override
+    public String toString() {
+        return "Minion{" + "name=" + name + ", position=" + position + ", level=" + level + ", maxhealthpoint=" + maxhealthpoint + ", maxmanapoint=" + maxmanapoint + ", healthpoint=" + healthpoint + ", manapoint=" + manapoint + ", rawattackpoint=" + rawattackpoint + ", rawarmor=" + rawarmor + ", evasion=" + evasion + ", accuracy=" + accuracy + ", primarystatus=" + primarystatus + ", secondarystatus=" + secondarystatus + ", equipment=" + equipment + '}';
+    }
     
     
 }

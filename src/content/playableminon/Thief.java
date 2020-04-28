@@ -17,7 +17,7 @@ import model.PrimaryStatus;
  */
 public class Thief extends PlayableMinion {
 
-    private static final String DEFAULT_NAME = "Assassin";
+    private static final String DEFAULT_NAME = "Theif";
     private static final double BASE_HEALTPOINT = 25;
     private static final double BASE_MANA = 15;
     private static final double BASE_AP = 35;
