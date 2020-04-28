@@ -16,7 +16,7 @@ import model.PrimaryStatus;
  * @author SURAPONGCHAMALAI
  */
 
-    public class Preist extends PlayableMinion {
+    public class Priest extends PlayableMinion {
       
       private static final String DEFAULT_NAME = "Priest";
       private static final double BASE_HEALTPOINT = 30; 
@@ -28,7 +28,7 @@ import model.PrimaryStatus;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
       private static final int CLASS_INDEX = ClassIndex.PREIST_INDEX;
 //    skill = Heal
-    public Preist() {
+    public Priest() {
     super(CLASS_INDEX,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 
     }
     

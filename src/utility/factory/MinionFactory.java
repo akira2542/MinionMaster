@@ -11,7 +11,7 @@ import content.playableminon.Duelist;
 import content.minion.Goblin;
 import content.minion.Orc;
 import content.playableminon.Knight;
-import content.playableminon.Preist;
+import content.playableminon.Priest;
 import content.playableminon.Thief;
 import java.util.Objects;
 import model.ClassIndex;
@@ -33,7 +33,7 @@ public class MinionFactory {
             case ClassIndex.KNIGHT_INDEX:
                 return new Knight();
             case ClassIndex.PREIST_INDEX:
-                return new Preist();
+                return new Priest();
             case ClassIndex.DUELIST_INDEX:
                 return new Duelist();
             case ClassIndex.THIEF_INDEX:
