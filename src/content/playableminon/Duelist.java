@@ -5,6 +5,7 @@
  */
 package content.playableminon;
 
+import model.ClassIndex;
 import model.LevelMultipiler;
 import model.Minion;
 import model.PlayableMinion;
@@ -23,7 +24,7 @@ public class Duelist extends PlayableMinion {
       private static final double BASE_EVASION = 10;
       private static final double BASE_ACC =  15;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
-      private static final int CLASS_INDEX = 103;
+      private static final int CLASS_INDEX = ClassIndex.DUELIST_INDEX;
 //    skill = Stun
     public Duelist() {
     super(CLASS_INDEX,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 

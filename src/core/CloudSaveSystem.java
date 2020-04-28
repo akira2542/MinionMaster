@@ -27,7 +27,7 @@ public class CloudSaveSystem {
     public static final String TABLE_NAME = "userprofile";
     
     public static void main(String[] args) {
-        CloudSaveSystem cs = new CloudSaveSystem();
+//        CloudSaveSystem cs = new CloudSaveSystem();
         PlayerProfile p = new PlayerProfile();
 //        cs.insertProfile(p, "123");
     }
@@ -76,35 +76,21 @@ public class CloudSaveSystem {
     }
     
     public Minion readProfile(String user,String password){
-        if (!isPasswordMatch(user,password)) return null;
-        String sql = "SELECT * FROM "+TABLE_NAME+" WHERE usr like";
+        String sql = "SELECT * FROM "+TABLE_NAME+" WHERE usr like "+user;
         try (Connection conn = DBConnector.getConnection()) {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                rs.getString("pwd");
-            }
+            if (rs.next()) {
+                if (rs.getString("pwd") == password) {
+                    
+                }else
+            }       
         return null;
        } catch (SQLException ex) {
          Logger.getLogger(CloudSaveSystem.class.getName()).log(Level.SEVERE, null, ex);
        }
         return null;
     }
-    
-    private boolean isPasswordMatch(String user,String password) {
-       boolean match = false;
-       String sql = "SELECT pwd FROM "+TABLE_NAME+" WHERE usr like "+user+" AND pwd like "+password;
-        try (Connection conn = DBConnector.getConnection()) {
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                match = password == rs.getString("pwd");
-            }
-       } catch (SQLException ex) {
-         Logger.getLogger(CloudSaveSystem.class.getName()).log(Level.SEVERE, null, ex);
-       }
-        return match;
-    } 
     
     private boolean isTableExist() throws SQLException{
         try (Connection conn = DBConnector.getConnection()) {

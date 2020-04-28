@@ -5,6 +5,7 @@
  */
 package content.playableminon;
 
+import model.ClassIndex;
 import model.LevelMultipiler;
 import model.Minion;
 import model.PlayableMinion;
@@ -25,7 +26,7 @@ public class Knight extends PlayableMinion {
       private static final double BASE_EVASION = 5;
       private static final double BASE_ACC = 5;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
-      private static final int CLASS_INDEX = 101;
+      private static final int CLASS_INDEX = ClassIndex.KNIGHT_INDEX;
 //    skill = Stun
     public Knight() {
     super(CLASS_INDEX,DEFAULT_NAME,BASE_HEALTPOINT,BASE_MANA,BASE_AP,BASE_ARMOR,BASE_EVASION,BASE_ACC,MULT); 

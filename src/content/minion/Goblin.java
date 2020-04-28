@@ -5,6 +5,7 @@
  */
 package content.minion;
 
+import model.ClassIndex;
 import model.LevelMultipiler;
 import model.Minion;
 import model.PrimaryStatus;
@@ -23,7 +24,7 @@ public class Goblin extends Minion{
       private static final double BASE_EVASION = 5;
       private static final double BASE_ACC = 0;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
-      private static final int CLASS_INDEX = 201;
+      private static final int CLASS_INDEX = ClassIndex.GOBLIN_INDEX;
 //    skill = will attack harder if hp below 10%    
     
     public Goblin() {

@@ -13,16 +13,15 @@ import java.io.Serializable;
  */
 public abstract class Minion implements Serializable {
     
-     // static stat
-    private static String name;
-    private static double BASEHP;
-    private static double BASEMP;
-    private static double BASEAP;
-    private static double BASEARMOR;
-    private static double BASEEVA;
-    private static double BASEACC;
-    private static LevelMultipiler MULT;
-    private static int CLASS_INDEX;
+    private final String name;
+    private final double BASEHP;
+    private final double BASEMP;
+    private final double BASEAP;
+    private final double BASEARMOR;
+    private final double BASEEVA;
+    private final double BASEACC;
+    private final LevelMultipiler MULT;
+    private final int CLASS_INDEX;
     
     //changeble stat
     private int position;
@@ -210,7 +209,7 @@ public abstract class Minion implements Serializable {
         return equipment;
     }
 
-    public static int getCLASS_INDEX() {
+    public int getCLASS_INDEX() {
         return CLASS_INDEX;
     }
     
