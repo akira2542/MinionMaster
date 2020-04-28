@@ -39,7 +39,7 @@ public class Duelist extends PlayableMinion {
     }
 
     @Override
-    public void actionDecider(Minion[] ourpaty, Minion[] enemyparty) {
+    public void actionDecider(Minion[] ourparty, Minion[] enemyparty) {
         for (int i = 0; i < enemyparty.length; i++) {
             Minion minion = enemyparty[i];
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
