@@ -5,6 +5,10 @@
  */
 package model;
 
+import core.resource.LevelMultipiler;
+import core.resource.Equipment;
+import model.enumurator.PrimaryStatus;
+import model.enumurator.SecondaryStatus;
 import exception.NullStatusException;
 import java.io.Serializable;
 
@@ -86,12 +90,12 @@ public abstract class Minion implements Serializable {
     //preconfigured method
     protected void attackOn(Minion enemy){
         if (evasionCheck(this.accuracy)) {
-            double deductedDmg = enemy.armorCheck(enemy.getCalculatedAttackPoint());
+            double deductedDmg = enemy.armorCheck(this.getCalculatedAttackPoint());
             enemy.healthpoint -= deductedDmg;
-            System.out.println(this.getName()+"("+this.getPosition()+")"+" attacked "+enemy.getName()+"("+enemy.getPosition()+")"+" Deals "+deductedDmg+" damage" + "reduce it helth to " + enemy.getHealthpoint());
+            System.out.println("lv."+this.getLevel()+" "+this.getName()+"("+this.getPosition()+")"+" attacked "+"lv."+enemy.getLevel()+" "+enemy.getName()+"("+enemy.getPosition()+")"+" Deals "+deductedDmg+" damage, " + "reduce it's helth to " + enemy.getHealthpoint());
             if (enemy.getHealthpoint() <= 0) {
                 enemy.primarystatus = PrimaryStatus.DEAD;
-                System.out.println(enemy.name+"("+this.getPosition()+")"+" is Dead!");
+                System.out.println("lv."+enemy.getLevel()+" "+enemy.name+"("+enemy.getPosition()+")"+" is Dead!");
             }   
         }else {
             System.out.println("Attack Missed!");
@@ -168,7 +172,7 @@ public abstract class Minion implements Serializable {
     public void refresh() {
     this.healthpoint = this.maxhealthpoint;
     this.manapoint = this.maxmanapoint;
-    this.secondarystatus = SecondaryStatus.STUNNED;
+    this.secondarystatus = SecondaryStatus.STABLE;
     }
 
     public double getAccuracy() {
@@ -236,6 +240,7 @@ public abstract class Minion implements Serializable {
         try {
         switch(this.secondarystatus) {
             case STUNNED:
+                this.secondarystatus = SecondaryStatus.STABLE;
                 return true;
             case STABLE:
                 return false;

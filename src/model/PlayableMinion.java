@@ -5,6 +5,9 @@
  */
 package model;
 
+import core.resource.LevelMultipiler;
+import model.enumurator.PrimaryStatus;
+
 /**
  *
  * @author SURAPONGCHAMALAI
@@ -114,6 +117,7 @@ public abstract class PlayableMinion extends Minion{
     public void receiveXP(long xp) {
     this.XPpool += xp;
     }
+    
     
     }
 

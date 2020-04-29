@@ -1,8 +1,9 @@
-package core;
+package core.resource;
 
 import content.minion.Goblin;
 import content.playableminon.Knight;
 import java.io.Serializable;
+import java.util.Iterator;
 import model.Minion;
 
 /*
@@ -15,7 +16,7 @@ import model.Minion;
  *
  * @author COM
  */
-public class PlayerProfile implements Serializable {
+public class PlayerProfile implements Serializable,Iterable<Minion>{
     
     private final String username;
     private Minion[] playerParty;
@@ -79,6 +80,22 @@ public class PlayerProfile implements Serializable {
     @Override
     public String toString() {
         return "PlayerProfile{" + "username=" + username + ", gold=" + gold + ", score=" + score + ", token=" + token + '}';
+    }
+
+    @Override
+    public Iterator<Minion> iterator() {
+        return new Iterator() {
+            int count = 0;
+            @Override
+            public boolean hasNext() {
+                return count < playerParty.length;
+            }
+
+            @Override
+            public Minion next() {
+                return playerParty[count++];
+            }
+        };
     }
  
     

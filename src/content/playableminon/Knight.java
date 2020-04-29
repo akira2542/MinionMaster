@@ -5,12 +5,12 @@
  */
 package content.playableminon;
 
-import model.ClassIndex;
-import model.LevelMultipiler;
+import model.enumurator.ClassIndex;
+import core.resource.LevelMultipiler;
 import model.Minion;
 import model.PlayableMinion;
-import model.PrimaryStatus;
-import model.SecondaryStatus;
+import model.enumurator.PrimaryStatus;
+import model.enumurator.SecondaryStatus;
 
 /**
  *

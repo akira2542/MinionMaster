@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package core.resource;
 
 import exception.UnmatchingIndexPositionException;
 import exception.UnmatchingLinkedListException;
 import model.Minion;
-import model.PrimaryStatus;
+import model.enumurator.PrimaryStatus;
 
 /**
  *
@@ -53,6 +53,7 @@ public class Battlefield {
         }
         return battleresult;
         }catch (UnmatchingIndexPositionException | UnmatchingLinkedListException ex){
+            ex.printStackTrace();
         }
         return false;
     }
