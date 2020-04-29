@@ -17,13 +17,13 @@ import model.enumurator.PrimaryStatus;
  */
 public class Duelist extends PlayableMinion {
     private static final String DEFAULT_NAME = "Duelist";
-      private static final double BASE_HEALTPOINT = 25; 
-      private static final double BASE_MANA = 20;
-      private static final double BASE_AP = 30;
-      private static final double BASE_ARMOR = 10;
-      private static final double BASE_EVASION = 10;
-      private static final double BASE_ACC =  15;
-      private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
+      private static final double BASE_HEALTPOINT = 15; 
+      private static final double BASE_MANA = 10;
+      private static final double BASE_AP = 10;
+      private static final double BASE_ARMOR = 7;
+      private static final double BASE_EVASION = 5;
+      private static final double BASE_ACC =  10;
+      private static final LevelMultipiler MULT = new LevelMultipiler(1.5,1.1,2.0,1.2,1.3,1.5);
       private static final int CLASS_INDEX = ClassIndex.DUELIST_INDEX;
 //    skill = Stun
     public Duelist() {
@@ -32,13 +32,13 @@ public class Duelist extends PlayableMinion {
     
     @Override
     protected void useSkillOn(Minion minion) {
-         if(this.getManapoint()>= 15){
+         if(this.getManapoint()>= 10){
         System.out.println(this.getName() + "had used Skill 'Deal 80%of atk to all enemy'! on " + minion.getName());
          this.setManapoint(this.getManapoint()-15);
          }
     }
 
-    @Override
+   @Override
     public void actionDecider(Minion[] ourparty, Minion[] enemyparty) {
         for (int i = 0; i < enemyparty.length; i++) {
             Minion minion = enemyparty[i];

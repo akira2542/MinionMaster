@@ -28,7 +28,7 @@ public class Dungeon {
     public static void main(String[] args) {
         PlayerProfile p = new PlayerProfile();
         MinionFactory.reassemblePlayerParty(p.getPlayerParty());
-        Dungeon d = DungeonFactory.createDungeon(Difficulty.HARD);
+        Dungeon d = DungeonFactory.createDungeon(Difficulty.EASY);
         Minion[] m = p.getPlayerParty();
         
         d.enter(p);

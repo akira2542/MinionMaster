@@ -18,23 +18,21 @@ public class TimeStopper {
     public static void Delay(int sec) {
         try {
 
-            System.out.println("Delay 1 sec");
+         
 
             TimeUnit.SECONDS.sleep(sec);
-            System.out.println("Finish...");
+            
 
         } catch (InterruptedException e) {
             System.err.format("IOException: %s%n", e);
         }
 
     }
-    public static void Delay() {
-            Delay(1);
-    }
+   
 
     public static void userInput() {
         Scanner uInput = new Scanner(System.in);
-        String enterkey = "Press Enter";
+        String enterkey = "Press Enter to continue";
         System.out.println(enterkey);
         enterkey = uInput.nextLine();
         System.out.println(enterkey);

@@ -19,13 +19,13 @@ import model.enumurator.PrimaryStatus;
     public class Priest extends PlayableMinion {
       
       private static final String DEFAULT_NAME = "Priest";
-      private static final double BASE_HEALTPOINT = 30; 
-      private static final double BASE_MANA = 30;
-      private static final double BASE_AP = 15;
-      private static final double BASE_ARMOR = 10;
-      private static final double BASE_EVASION = 5;
-      private static final double BASE_ACC = 5;
-      private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
+      private static final double BASE_HEALTPOINT = 20; 
+      private static final double BASE_MANA = 15;
+      private static final double BASE_AP = 5;
+      private static final double BASE_ARMOR = 3;
+      private static final double BASE_EVASION = 3;
+      private static final double BASE_ACC = 7;
+      private static final LevelMultipiler MULT = new LevelMultipiler(2.0,1.8,1.1,1.2,1.1,1.3);
       private static final int CLASS_INDEX = ClassIndex.PRIEST_INDEX;
 //    skill = Heal
     public Priest() {
@@ -34,7 +34,7 @@ import model.enumurator.PrimaryStatus;
     
     @Override
     protected void useSkillOn(Minion minion) {
-        if(this.getManapoint()>= 15){
+        if(this.getManapoint()>= 12){
         System.out.println(this.getName() + "had used Skill 'Heal'! on " + minion.getName());
         this.setManapoint(this.getManapoint()-15);
          minion.setHealthpoint(minion.getManapoint()+30);
@@ -45,16 +45,14 @@ import model.enumurator.PrimaryStatus;
    
     
 
-
-    @Override
+@Override
     public void actionDecider(Minion[] ourparty, Minion[] enemyparty) {
- for (int i = 0; i < enemyparty.length; i++) {
+        for (int i = 0; i < enemyparty.length; i++) {
             Minion minion = enemyparty[i];
-            Minion team   =  ourparty[i];
-            if (team.getHealthpoint()<=50/100) {
-              this.useSkillOn(team);
-               
+            if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
+              this.attackOn(minion);
               break;
             }
-        }    }
+        }
+    }
 }

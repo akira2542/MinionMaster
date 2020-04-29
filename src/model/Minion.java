@@ -11,6 +11,7 @@ import model.enumurator.PrimaryStatus;
 import model.enumurator.SecondaryStatus;
 import exception.NullStatusException;
 import java.io.Serializable;
+import utility.TimeStopper;
 
 /**
  *
@@ -92,14 +93,17 @@ public abstract class Minion implements Serializable {
         if (evasionCheck(this.accuracy)) {
             double deductedDmg = enemy.armorCheck(this.getCalculatedAttackPoint());
             enemy.healthpoint -= deductedDmg;
-            System.out.println("lv."+this.getLevel()+" "+this.getName()+"("+this.getPosition()+")"+" attacked "+"lv."+enemy.getLevel()+" "+enemy.getName()+"("+enemy.getPosition()+")"+" Deals "+deductedDmg+" damage, " + "reduce it's helth to " + enemy.getHealthpoint());
+            System.out.println("lv."+this.getLevel()+" "+this.getName()+"("+this.getPosition()+")"+" attacked "+"lv."+enemy.getLevel()+" "+enemy.getName()+"("+enemy.getPosition()+")"+" Deals "+deductedDmg+" damage, " + "reduce it's health to " + enemy.getHealthpoint());
+           
             if (enemy.getHealthpoint() <= 0) {
                 enemy.primarystatus = PrimaryStatus.DEAD;
                 System.out.println("lv."+enemy.getLevel()+" "+enemy.name+"("+enemy.getPosition()+")"+" is Dead!");
             }   
         }else {
-            System.out.println("Attack Missed!");
-        }
+            System.out.println("lv."+this.getLevel()+" "+this.getName()+"("+this.getPosition()+")"+" attacked "+"lv."+enemy.getLevel()+" "+enemy.getName()+"("+enemy.getPosition()+") but missed" );
+            
+        } 
+        TimeStopper.Delay(1);
     }
     
     protected void attackOn(Minion minion,int SkillDamage) {

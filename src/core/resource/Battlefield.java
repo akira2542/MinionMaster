@@ -9,6 +9,7 @@ import exception.UnmatchingIndexPositionException;
 import exception.UnmatchingLinkedListException;
 import model.Minion;
 import model.enumurator.PrimaryStatus;
+import utility.TimeStopper;
 
 /**
  *
@@ -29,6 +30,8 @@ public class Battlefield {
         boolean battleresult = false; // true = visiting party win
         while( !isAllDead(localParty) && !isAllDead(visitingParty)){
             this.turncounter++;
+           // System.out.print("To start new turn ");
+            //TimeStopper.userInput();
             System.out.println("Turn "+this.turncounter);
             System.out.println("visiting party turn!");
             for (Minion visitingminion : visitingParty) {
