@@ -5,10 +5,10 @@
  */
 package content.minion;
 
-import model.ClassIndex;
-import model.LevelMultipiler;
+import model.enumurator.ClassIndex;
+import core.resource.LevelMultipiler;
 import model.Minion;
-import model.PrimaryStatus;
+import model.enumurator.PrimaryStatus;
 
 /**
  *
@@ -22,7 +22,7 @@ public class Orc extends Minion{
       private static final double BASE_AP = 3;
       private static final double BASE_ARMOR = 5;
       private static final double BASE_EVASION = 0;
-      private static final double BASE_ACC = 10;
+      private static final double BASE_ACC = 15;
       private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
       private static final int CLASS_INDEX = ClassIndex.ORC_INDEX;
 //    skill = will attack harder if hp below 10%    

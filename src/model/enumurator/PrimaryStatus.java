@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package model.enumurator;
 
 /**
  *
  * @author COM
  */
-public class ProfileOrganizer {
-    
+public enum PrimaryStatus {
+    ALIVE,DEAD
 }
+

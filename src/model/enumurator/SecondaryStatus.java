@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.enumurator;
 
 /**
  *
  * @author COM
  */
-public enum PrimaryStatus {
-    ALIVE,DEAD
-}
+public enum SecondaryStatus {
+     STUNNED,STABLE;
 
+     
+     
+}

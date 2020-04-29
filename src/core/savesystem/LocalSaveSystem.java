@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package core.savesystem;
 
+import core.resource.PlayerProfile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,6 +23,7 @@ public class LocalSaveSystem {
     public static final int MAX_SAVE_SLOT = 3;
     private PlayerProfile[] saveslots = new PlayerProfile[MAX_SAVE_SLOT];
     
+    
     public LocalSaveSystem() {
         saveSlotInitialization();
     }
@@ -34,9 +36,9 @@ public class LocalSaveSystem {
     }
     
     private void saveSlotInitialization() {
-        for (int i = 1; i < MAX_SAVE_SLOT; i++) {
+        for (int i = 0; i < MAX_SAVE_SLOT; i++) {
             if (isSlotExist(i)) {
-                this.saveslots[i] = this.readProfileSave("slot_"+i+".save");
+                this.saveslots[i] = this.loadProfile(i);
             }
         }
     }
@@ -51,7 +53,7 @@ public class LocalSaveSystem {
     }
     
     public static boolean saveProfile(PlayerProfile profile,int slot) {
-        if (slot > 0 && slot <= MAX_SAVE_SLOT) {
+        if (slot >= 0 && slot <= MAX_SAVE_SLOT) {
             writeProfile(profile,"slot_"+slot+".save");
             return true;
         }
@@ -72,7 +74,7 @@ public class LocalSaveSystem {
     }
     
     public static PlayerProfile loadProfile(int index) {
-        if (index > 0 && index <= MAX_SAVE_SLOT) {
+        if (index >= 0 && index < MAX_SAVE_SLOT) {
             return readProfileSave("slot_"+index+".save");
         }
         return null;

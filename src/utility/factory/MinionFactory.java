@@ -13,10 +13,10 @@ import content.minion.Orc;
 import content.playableminon.Knight;
 import content.playableminon.Priest;
 import content.playableminon.Thief;
-import core.PlayerProfile;
-import model.ClassIndex;
-import model.Equipment;
-import model.EquipmentGrade;
+import core.resource.PlayerProfile;
+import model.enumurator.ClassIndex;
+import core.resource.Equipment;
+import model.enumurator.EquipmentGrade;
 import model.Minion;
 import model.PlayableMinion;
 
@@ -41,6 +41,10 @@ public class MinionFactory {
             default:
                 return null;
         }
+    }
+    
+    public static Minion createPlayableMinion(ClassIndex index) {
+        return createPlayableMinion(index.getIndex());
     }
     
     public static Minion createPlayableMinion(int classIndex,long xp,int weaponlevel,EquipmentGrade weapongrade,int armorlevel,EquipmentGrade armorgrade) {

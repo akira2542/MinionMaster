@@ -25,13 +25,13 @@ public class UnmatchingLinkedListException extends Exception{
             int nextIndex = (i+1 < pms.length) ? i+1 : -1;
             int previousIndex = ( i-1 >= 0)? i-1 : -1;
             if (nextIndex > -1) {
-                if (!pm.getNext().equals(pms[nextIndex].getPrevious())) {
+                if (!pm.getNext().equals(pms[nextIndex])) {
                         bool = false;
                         break;
                     }
                 }
             if (previousIndex > - 1) {
-               if (!pm.getPrevious().equals(pms[previousIndex].getNext())) {
+               if (!pm.getPrevious().equals(pms[previousIndex])) {
                    bool = false;
                    break;
                }

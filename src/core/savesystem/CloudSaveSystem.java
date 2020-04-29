@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package core.savesystem;
 
+import core.resource.PlayerProfile;
 import exception.UnmatchingIndexPositionException;
 import exception.UnmatchingLinkedListException;
 import java.sql.Connection;
@@ -15,7 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Equipment;
+import core.resource.Equipment;
+import model.enumurator.EquipmentGrade;
 import model.Minion;
 import model.PlayableMinion;
 import utility.JDBC.DBConnector;
@@ -78,9 +80,9 @@ public class CloudSaveSystem {
                        pstm.setInt(i++, m.getCLASS_INDEX());
                        pstm.setInt(i++, (int) m.getXPpool());
                        pstm.setInt(i++,m.getEquipment().getWeaponlv());
-                       pstm.setInt(i++,Equipment.getEquipmentGradeIndex(m.getEquipment().getWeaponGrade()));
+                       pstm.setInt(i++,EquipmentGrade.getEquipmentGradeIndex(m.getEquipment().getWeaponGrade()));
                        pstm.setInt(i++,m.getEquipment().getArmorlv());
-                       pstm.setInt(i++,Equipment.getEquipmentGradeIndex(m.getEquipment().getArmorGrade()));
+                       pstm.setInt(i++,EquipmentGrade.getEquipmentGradeIndex(m.getEquipment().getArmorGrade()));
                    }
               }
               pstm.executeUpdate();
@@ -93,6 +95,7 @@ public class CloudSaveSystem {
         updateSave(profile,pwd);
         }
         }catch (UnmatchingIndexPositionException | UnmatchingLinkedListException ex){
+            ex.printStackTrace();
         }   
     }
     
@@ -109,7 +112,7 @@ public class CloudSaveSystem {
                     profile.receiveScore(rs.getInt("score"));
                     profile.receiveToken(rs.getInt("token"));
                     for (int i = 0; i < minions.length; i++) {
-                        minions[i] = MinionFactory.createPlayableMinion(rs.getInt("char_classindex_"+i), rs.getInt("char_xp_"+i),rs.getInt("char_wep_lv_"+i) , Equipment.getEquipmentGrade(rs.getInt("char_wep_grade_"+i)), rs.getInt("char_ar_lv_"+i), Equipment.getEquipmentGrade(rs.getInt("char_ar_grade_"+i)));
+                        minions[i] = MinionFactory.createPlayableMinion(rs.getInt("char_classindex_"+i), rs.getInt("char_xp_"+i),rs.getInt("char_wep_lv_"+i) , EquipmentGrade.getEquipmentGrade(rs.getInt("char_wep_grade_"+i)), rs.getInt("char_ar_lv_"+i), EquipmentGrade.getEquipmentGrade(rs.getInt("char_ar_grade_"+i)));
 
                     }
                     MinionFactory.reassemblePlayerParty(minions);
@@ -220,9 +223,9 @@ public class CloudSaveSystem {
                        pstm.setInt(i++, m.getCLASS_INDEX());
                        pstm.setInt(i++, (int) m.getXPpool());
                        pstm.setInt(i++,m.getEquipment().getWeaponlv());
-                       pstm.setInt(i++,Equipment.getEquipmentGradeIndex(m.getEquipment().getWeaponGrade()));
+                       pstm.setInt(i++,EquipmentGrade.getEquipmentGradeIndex(m.getEquipment().getWeaponGrade()));
                        pstm.setInt(i++,m.getEquipment().getArmorlv());
-                       pstm.setInt(i++,Equipment.getEquipmentGradeIndex(m.getEquipment().getArmorGrade()));
+                       pstm.setInt(i++,EquipmentGrade.getEquipmentGradeIndex(m.getEquipment().getArmorGrade()));
                    }
               }
             pstm.executeUpdate();

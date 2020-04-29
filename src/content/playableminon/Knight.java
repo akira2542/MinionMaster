@@ -5,12 +5,12 @@
  */
 package content.playableminon;
 
-import model.ClassIndex;
-import model.LevelMultipiler;
+import model.enumurator.ClassIndex;
+import core.resource.LevelMultipiler;
 import model.Minion;
 import model.PlayableMinion;
-import model.PrimaryStatus;
-import model.SecondaryStatus;
+import model.enumurator.PrimaryStatus;
+import model.enumurator.SecondaryStatus;
 
 /**
  *
@@ -19,13 +19,13 @@ import model.SecondaryStatus;
 public class Knight extends PlayableMinion {
       
       private static final String DEFAULT_NAME = "Knight";
-      private static final double BASE_HEALTPOINT = 40; 
-      private static final double BASE_MANA = 20;
-      private static final double BASE_AP = 20;
-      private static final double BASE_ARMOR = 10;
-      private static final double BASE_EVASION = 5;
+      private static final double BASE_HEALTPOINT = 25; 
+      private static final double BASE_MANA = 10;
+      private static final double BASE_AP = 10;
+      private static final double BASE_ARMOR = 15;
+      private static final double BASE_EVASION = 3;
       private static final double BASE_ACC = 5;
-      private static final LevelMultipiler MULT = new LevelMultipiler(1.1);
+      private static final LevelMultipiler MULT = new LevelMultipiler(2.0,1.1,1.2,1.5,1.1,1.1);
       private static final int CLASS_INDEX = ClassIndex.KNIGHT_INDEX;
 //    skill = Stun
     public Knight() {
@@ -34,7 +34,7 @@ public class Knight extends PlayableMinion {
     
     @Override
     protected void useSkillOn(Minion minion) {
-         if(this.getManapoint()>= 10){
+         if(this.getManapoint()>= 5){
            System.out.println(this.getName() + "had used Skill 'Stun'! on " + minion.getName());
             this.setManapoint(this.getManapoint()-10);
              
