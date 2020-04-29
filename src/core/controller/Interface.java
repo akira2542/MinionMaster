@@ -5,6 +5,7 @@
  */
 package core.controller;
 
+import core.resource.Dungeon;
 import core.resource.PlayerProfile;
 import core.savesystem.LocalSaveSystem;
 import java.util.Scanner;
@@ -14,6 +15,8 @@ import model.Minion;
 import model.enumurator.ClassIndex;
 import utility.factory.DungeonFactory;
 import model.enumurator.Difficulty;
+import model.enumurator.EquipmentGrade;
+import utility.TimeStopper;
 import utility.factory.MinionFactory;
 
 /**
@@ -34,17 +37,21 @@ public class Interface {
     //  newgame loadgame
     //create profile createchar
     private void newGame(Scanner scn){
+        System.out.println("=========================");
         System.out.println("WELCOME TO MINION MASTER©");
-        System.out.println("[ Load or Create new save game ]");
-        System.out.println("Press 1 to load local");
-        System.out.println("Press 2 to load cloud");
-        System.out.println("Press 3 to create new");
+        System.out.println("=========================");
+        System.out.println("Load or Create new save game ");
+        System.out.println("1 | Load local save");
+        System.out.println("2 | Load cloud save");
+        System.out.println("3 | Create new profile");
+        System.out.print("your option : ");
         boolean inputcheck = true; 
             while(inputcheck){
                     int input = scn.nextInt();
                     switch(input){
                         case 1:
                             inputcheck = false;
+                            localLoadInterface(scn);
                             break;
                         case 2:
                             inputcheck = false;
@@ -66,6 +73,7 @@ public class Interface {
         boolean inputcheck = true;
         System.out.println("Insert Username");
         System.out.println("#it can't not be changed later!");
+        System.out.print("username : ");
         while (inputcheck) {
             String input = scn.next();
             if (cs.isUsernameExist(input)) {
@@ -91,7 +99,7 @@ public class Interface {
                 System.out.println("2. Priest  : can heal fellow minions weares little armor");
                 System.out.println("3. Duelist : powerful attack and agile but can't take too much beating");
                 System.out.println("4. Thief   : decent backline attack can't take any beating");
-                System.out.print("input :");
+                System.out.print("your option : ");
                 int input = scn.nextInt();
                 switch(input) {
                     case 1:
@@ -123,33 +131,64 @@ public class Interface {
         System.out.println("Party has been assembled here's an overview");
         for (Minion p : sessionprofile) {
         System.out.println(p);
-        menu(scn);    
+        baseInterface(scn);    
         }
         
     }
 
 
-    public void menu(Scanner scn) {
+    public void baseInterface(Scanner scn) {
             System.out.println("=======================");
             System.out.println("     Base Interface    ");
             System.out.println("=======================");
-            System.out.println("welcome "+this.sessionprofile.getUsername()+" to the base! here you can choose to");
-            System.out.println("1. Go to battle with your minions");
-            System.out.println("2. Mange your minion equipments");
-            System.out.println("3. Save Online Profile");
-            System.out.println("4. Save Local Profile");
-           //  System.out.println(profile.getGold());
-          //  System.out.println(profile.getUsername());
+            System.out.println("welcome '"+this.sessionprofile.getUsername()+"' to the base! here you can choose to");
+            System.out.println("1 | Go to battle with your minions");
+            System.out.println("2 | Mange your minion equipments");
+            System.out.println("3 | Check your treasury and tokens");
+            System.out.println("4 | Check score");
+            System.out.println("5 | Save Online Profile");
+            System.out.println("6 | Save Local Profile");
+            System.out.println("7 | exit (without saving)");
+            System.out.print("your option: ");
             int num = scn.nextInt();
             switch(num){
                 case 1 :
-                    goBattle();
+                      goBattle(scn);
                     break;
                 case 2 :
-                    upequipmentlevel();
+                     upequipmentInterface(scn);
+                    break;
+                case 3 :
+                    System.out.println("=======================");
+                    System.out.println("        Treasury       ");
+                    System.out.println("=======================");
+                    System.out.println("Gold use to advance minion's weapon levels, Token use for advance minion's weapon grads!");
+                    System.out.println("Gold   : "+this.sessionprofile.getGold());
+                    System.out.println("Tokens : "+this.sessionprofile.getToken());
+                    TimeStopper.userInput();
+                    baseInterface(scn);
+                    break;
+                case 4 :
+                    System.out.println("=======================");
+                    System.out.println("         Score         ");
+                    System.out.println("=======================");
+                    System.out.println("your score :"+ this.sessionprofile.getScore());
+                    TimeStopper.userInput();
+                    baseInterface(scn);
+                    break;
+                case 5 :
+                    break;
+                case 6:
+                    localSaveInterface(scn);
+                    break;
+                case 7:
+                    System.out.println("Exiting game");
+                    TimeStopper.Delay();
+                    System.out.println("Good Bye! :)");
                     break;
                 default :
-                    System.out.println("invalid num");
+                    System.out.println("invalid input, try again!");
+                    baseInterface(scn);
                     break;
             }
 
@@ -157,86 +196,157 @@ public class Interface {
 
     }
 
-    public void goBattle() {
-//go dungeon
-        Scanner Battle = new Scanner(System.in);
+    public void goBattle(Scanner scn) {
+        boolean inputcheck = true;
+        Dungeon dungeon = null;
+        while (inputcheck) {
+        System.out.println("===================");
+        System.out.println("    DUNGEON RAID   ");
+        System.out.println("===================");
         System.out.println("Choose Difficulty");
-        System.out.println("1 : Easy");
-        System.out.println("2 : Medium");
-        System.out.println("3 : Hard");
-        int num = Battle.nextInt();
-        switch(num){
-            case 1 :
-                DungeonFactory.createDungeon(Difficulty.EASY_INDEX);
-                break;
-            case 2 :
-                DungeonFactory.createDungeon(Difficulty.MEDIUM_INDEX);
-                break;
-            case 3 :
-                DungeonFactory.createDungeon(Difficulty.HARD_INDEX);
-                break;
-            default : System.out.println("invalid num");
-            break;
+        System.out.println("1 | Easy");
+        System.out.println("2 | Medium");
+        System.out.println("3 | Hard");
+        System.out.println("your option : ");
+        int num = scn.nextInt();
+            switch(num){
+                case 1 :
+                    inputcheck = false;
+                    System.out.println("You have Chosen Dungeon in EASY difficulty!");
+                    dungeon = DungeonFactory.createDungeon(Difficulty.EASY.getIndex());
+                    break;
+                case 2 :
+                    inputcheck = false;
+                    System.out.println("You have Chosen Dungeon in MEDIUM difficulty!");
+                    dungeon = DungeonFactory.createDungeon(Difficulty.MEDIUM.getIndex());
+                    break;
+                case 3 :
+                    inputcheck = false;
+                    System.out.println("You have Chosen Dungeon in HARD difficulty!");
+                    dungeon =DungeonFactory.createDungeon(Difficulty.HARD.getIndex());
+                    break;
+                default : System.out.println("invalid option, try agian");
+                    break;
+            }
+            TimeStopper.userInput();
+            dungeon.enter(sessionprofile);
+            baseInterface(scn);
         }
-
-
-        //Dungeon dun = DungeonFactory.createDungeon(DungeonFactory.HARD_INDEX);
-        //dun.enter(profile);
-
+        
     }
 
-    public void upequipmentlevel() {
-        //up equipment
-        Scanner Equip = new Scanner(System.in);
-        System.out.println("Select Your Equipment");
-        System.out.println("1 = Weapon");
-        System.out.println("2 = Armor");
-        int num = Equip.nextInt();
-        Equipment e = new Equipment();
-        switch(num){
-            case 1 :
-            System.out.println("Equipment = Weapon ");
-            Equipment.getIncreaseEquipmentLevelPrice(e.getWeaponlv(), e.getWeaponGrade());
-            break;
-            case 2 :
-                System.out.println("Equipment = Armor ");
-                 Equipment.getIncreaseEquipmentLevelPrice(e.getArmorlv(), e.getArmorGrade());
-            break;
-            default :
-                System.out.println("Wrong Input");
-                break;
-        }
-
-    }
-    
-
-    private void saveLocalProfile(int slot) {
-        LocalSaveSystem.saveProfile(this.sessionprofile, slot);
-    }
-
-    public void localLoadSaveInterface() {
-        Scanner Save = new Scanner(System.in);
-        System.out.println("Choose the Slot to Save 0 - 2");
-        int num = Save.nextInt();
-        System.out.println("You save to slot " + num);
-        for (int i = 0; i < 4; i++) {
-            if (i == num) {
-                LocalSaveSystem.saveProfile(this.sessionprofile, num);
-
+    public void upequipmentInterface(Scanner scn) {
+        //upgrade minion's equipment
+        boolean inputcheck = true;
+        while(inputcheck) {
+        System.out.println("===================");
+        System.out.println(" EQUIPMENT UPGRADE ");
+        System.out.println("===================");
+        System.out.println("Which Character would you like to upgrade their eqipment");
+            int i = 1;
+            for (Minion minion : sessionprofile) {
+                System.out.println(i+" | lv."+minion.getLevel()+" "+minion.getName()+" [WEPLV: "+minion.getEquipment().getWeaponlv() + ", WEPGRADE: "+minion.getEquipment().getWeaponGrade()+", ARLV: "+minion.getEquipment().getArmorlv() + ", ARGRADE: "+minion.getEquipment().getArmorGrade()+"]");
+                i++;
+            }
+        System.out.println("5 | back to base");
+        System.out.print("your option : ");
+        int num = scn.nextInt();
+            if (num > 0 && num <= this.sessionprofile.getPlayerParty().length ) {
+                num--;
+                characterEquipment(scn,this.sessionprofile.getPlayerParty()[num]);
+                
+            }else if (num == 5){
+                inputcheck = false;
+                baseInterface(scn);
+            }
+            else {
+            System.out.println("invalid option, try agian");
             }
         }
-        LocalSaveSystem savesys = new LocalSaveSystem();
-        PlayerProfile[] slots = savesys.getSaveSlots();
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < slots.length; i++) {
+    }
+    
+    public void characterEquipment(Scanner scn,Minion m) {
+        boolean inputcheck = true;
+        Equipment e = m.getEquipment();
+        long wplvcost = Equipment.getIncreaseEquipmentLevelPrice(e.getWeaponlv(), e.getWeaponGrade());
+        long arlvcost = Equipment.getIncreaseEquipmentLevelPrice(e.getArmorlv(), e.getArmorGrade());
+        int wpgradecost = Equipment.getTokenUpgradePrice(e.getWeaponGrade());
+        int argradecost = Equipment.getTokenUpgradePrice(e.getArmorGrade());
+        while (inputcheck) {
+        System.out.println("=========================================================");
+        System.out.println(" EQUIPMENT UPGRADE FOR LV."+m.getLevel()+" "+m.getName());
+        System.out.println("=========================================================");
+        System.out.println(" [WEPLV: "+e.getWeaponlv() + ", WEPGRADE: "+e.getWeaponGrade()+", ARLV: "+e.getArmorlv() + ", ARGRADE: "+e.getArmorGrade());
+        System.out.println("1 | Level up your weapon using gold         | COST: "+wplvcost+" GOLD");
+        System.out.println("2 | Level up your armor using gold          | COST: "+arlvcost+" GOLD");
+        System.out.println("3 | Advance your weapon grade using tokens  | COST: "+wpgradecost+" TOKENS");
+        System.out.println("4 | Advance your armor grade using tokens   | COST: "+argradecost+" TOKENS");
+        System.out.println("5 | Back");
+        System.out.println("Available Gold :"+this.sessionprofile.getGold()+", Available Tokens "+this.sessionprofile);
+        System.out.print("Your option : ");
+        int input = scn.nextInt();
+        }
+    }
+    
+    public void localSaveInterface(Scanner scn) {
+        boolean inputcheck = true;
+        while (inputcheck) {
+        System.out.println("=======================");
+        System.out.println("       SAVE LOCAL      ");
+        System.out.println("=======================");
+        System.out.println("Choose slot to save. slot you choose will overite existing file");
+        PlayerProfile[] slots = getLocalSaveProfiles();
+        System.out.print("save in slot:");
+        int input = scn.nextInt();
+            if (input >= 0 && input <=3) {
+                LocalSaveSystem.saveProfile(sessionprofile, input);
+                inputcheck = false;
+                baseInterface(scn);
+            }else{
+                System.out.println("Invalid input, try agian");
+            }       
+        }
+    }
+    
+    public void localLoadInterface(Scanner scn) {
+        boolean inputcheck = true;
+        while (inputcheck) {
+        System.out.println("=======================");
+        System.out.println("       LOAD LOCAL      ");
+        System.out.println("=======================");
+        System.out.println("Choose save slot to load.");
+        PlayerProfile[] slots = getLocalSaveProfiles();
+        System.out.print("load slot:");
+        int input = scn.nextInt();
+            if (input >= 0 && input <=3) {
+                if (slots[input] != null) {
+                this.sessionprofile = slots[input];
+                inputcheck = false;
+                baseInterface(scn);
+                }else {
+                    System.out.println("you loaded empty slot! try again.");
+                }
+            }else{
+                System.out.println("Invalid input, try agian");
+            }       
+        }
+        
+    }
+    
+    private PlayerProfile[] getLocalSaveProfiles() {
+            LocalSaveSystem savesys = new LocalSaveSystem();
+            PlayerProfile[] slots = savesys.getSaveSlots();
+            StringBuilder s = new StringBuilder();
+                    for (int i = 0; i < slots.length; i++) {
             PlayerProfile slot = slots[i];
             if (slot != null) {
-                s.append("SLOT ").append(i).append(" :").append(slot.getUsername()).append("\n");
+                s.append("[ SLOT ").append(i).append(" : ").append(slot.getUsername()).append(" ]\n");
             } else {
-                s.append("SLOT ").append(i).append(" :").append(" emptyslot \n");
+                s.append("[ SLOT ").append(i).append(" : ").append(" empty ]\n");
             }
         }
         System.out.println(s);
+        return slots;
     }
 
     public static void main(String[] args) {
