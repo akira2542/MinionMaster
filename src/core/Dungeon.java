@@ -51,7 +51,7 @@ public class Dungeon {
           int roomnum = i+1;
           System.out.println("Room No. "+roomnum+" Battle Begins!");
           if (this.battleFields[i].battle(visitingParty)) {
-              this.restoreHelth(visitingParty);
+              this.restoreHealth(visitingParty);
               System.out.println("Room No. "+roomnum+" Cleared!");
               if ( roomnum == this.battleFields.length ) {
                   System.out.println("The dungoen is cleared");
@@ -68,7 +68,7 @@ public class Dungeon {
   }
   
   // restore party's helth to max
-  public void restoreHelth(Minion[] party) {
+  public void restoreHealth(Minion[] party) {
       for (Minion minion : party) {
           minion.refresh();
       }

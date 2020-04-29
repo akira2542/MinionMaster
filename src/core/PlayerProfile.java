@@ -57,7 +57,7 @@ public class PlayerProfile implements Serializable {
     }
     
     public void receiveToken(int token) {
-        
+        this.token += token;
     }
 
     public String getUsername() {
@@ -75,11 +75,13 @@ public class PlayerProfile implements Serializable {
     public int getToken() {
         return token;
     }
- 
+
     @Override
     public String toString() {
-        return "PlayerProfile{" + "username=" + username + ", playerParty=" + playerParty + ", gold=" + gold + ", score=" + score + '}';
+        return "PlayerProfile{" + "username=" + username + ", gold=" + gold + ", score=" + score + ", token=" + token + '}';
     }
+ 
+    
     
     
 }

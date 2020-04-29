@@ -9,6 +9,10 @@ package exception;
  *
  * @author COM
  */
-public class UnmatchingIndexPosition {
-    
+public class NullStatusException extends Exception{
+    private static final String MSG = "Statuses is not suppose to be null"; 
+    public NullStatusException()
+   {
+      super (MSG);
+   }
 }

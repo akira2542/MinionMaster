@@ -5,6 +5,7 @@
  */
 package model;
 
+import exception.NullStatusException;
 import java.io.Serializable;
 
 /**
@@ -27,8 +28,6 @@ public abstract class Minion implements Serializable {
     private int position;
     private int level;
     private double maxhealthpoint;
-    private double maxmanapoint;
-    private double healthpoint;
     private double manapoint;
     private double rawattackpoint;
     private double rawarmor;
@@ -38,6 +37,15 @@ public abstract class Minion implements Serializable {
     private SecondaryStatus secondarystatus;
     private Equipment equipment; 
     
+    //battle relatedvariable
+    private double maxmanapoint;
+    private double healthpoint;
+
+
+    public void setInflictstatustime(double inflictstatustime) {
+        this.inflictstatustime = inflictstatustime;
+    }
+    private double inflictstatustime;
     
     
     //contructor
@@ -56,6 +64,7 @@ public abstract class Minion implements Serializable {
         // new minnion will start with level 1 and common lv 1 equipment 
         this.level = 1;
         this.primarystatus = PrimaryStatus.ALIVE;
+        this.secondarystatus = SecondaryStatus.STABLE;
         this.equipment = new Equipment();
         
         this.maxhealthpoint = basehelthpoint;
@@ -127,6 +136,11 @@ public abstract class Minion implements Serializable {
         }
     }
     
+    public double getInflictstatustime() {
+        return inflictstatustime;
+    }
+
+    
     public void setEquipment(Equipment equipment) {
      this.equipment = equipment;   
     }    
@@ -146,10 +160,15 @@ public abstract class Minion implements Serializable {
     protected void setSecondarystatus(SecondaryStatus secondarystatus) {
         this.secondarystatus = secondarystatus;
     }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
     
     public void refresh() {
     this.healthpoint = this.maxhealthpoint;
     this.manapoint = this.maxmanapoint;
+    this.secondarystatus = SecondaryStatus.STUNNED;
     }
 
     public double getAccuracy() {
@@ -212,6 +231,24 @@ public abstract class Minion implements Serializable {
     public int getCLASS_INDEX() {
         return CLASS_INDEX;
     }
+    
+    public boolean isStunned(){
+        try {
+        switch(this.secondarystatus) {
+            case STUNNED:
+                return true;
+            case STABLE:
+                return false;
+            default:
+                throw new NullStatusException();
+        }
+        }catch (NullStatusException ex) {
+        ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    
 
     @Override
     public String toString() {

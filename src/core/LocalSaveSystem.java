@@ -12,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import model.Minion;
 
 /**
  *
@@ -21,7 +20,6 @@ import model.Minion;
 public class LocalSaveSystem {
     
     public static final int MAX_SAVE_SLOT = 3;
-    
     private PlayerProfile[] saveslots = new PlayerProfile[MAX_SAVE_SLOT];
     
     public LocalSaveSystem() {

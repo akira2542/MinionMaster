@@ -23,8 +23,7 @@ public class Interface {
  //  newgame loadgame
     //create profile createchar
     public void newGame(){
-        
-           
+          
         System.out.println("Load or Create new save game");
         System.out.println("Press 1 to load local");
         System.out.println("Press 2 to load cloud");

@@ -5,6 +5,8 @@
  */
 package core;
 
+import exception.UnmatchingIndexPositionException;
+import exception.UnmatchingLinkedListException;
 import model.Minion;
 import model.PrimaryStatus;
 
@@ -21,12 +23,16 @@ public class Battlefield {
     }
    
     public boolean battle(Minion[] visitingParty) {
+        try {
+            if (!UnmatchingIndexPositionException.isPositionMatch(visitingParty)) throw  new UnmatchingIndexPositionException();
+            if (!UnmatchingLinkedListException.isLinkedListMatched(visitingParty)) throw new UnmatchingLinkedListException();
         boolean battleresult = false; // true = visiting party win
         while( !isAllDead(localParty) && !isAllDead(visitingParty)){
             this.turncounter++;
             System.out.println("Turn "+this.turncounter);
             System.out.println("visiting party turn!");
             for (Minion visitingminion : visitingParty) {
+                if(visitingminion.isStunned()) continue;
                 visitingminion.actionDecider(visitingParty, localParty);
             }
             if (isAllDead(localParty)) {
@@ -36,6 +42,7 @@ public class Battlefield {
             }
             System.out.println("local party turn!");
             for (Minion localminion : this.localParty) {
+                if(localminion.isStunned()) continue;
                 localminion.actionDecider(localParty, visitingParty);
             }
             if (isAllDead(visitingParty)) {
@@ -45,6 +52,9 @@ public class Battlefield {
             }
         }
         return battleresult;
+        }catch (UnmatchingIndexPositionException | UnmatchingLinkedListException ex){
+        }
+        return false;
     }
     
     private boolean isAllDead(Minion[] party) {

@@ -38,10 +38,6 @@ public class DungeonFactory {
         private static final double HARD_REWARD_MULTIPILER = 1.5;
         
         
-        public static void main(String[] args) {
-        Dungeon d = DungeonFactory.createDungeon(EASY_INDEX);
-    }
-        
         public static Dungeon createDungeon(int index) {
             switch (index) {
                 case EASY_INDEX:
@@ -65,6 +61,7 @@ public class DungeonFactory {
                    int level = randomWithDeviation(levelrange,RANGE_DEVIATION);
                    minions[j] = MinionFactory.createMinion(classindex,level);
                 }
+                MinionFactory.reassembleMinion(minions);
                 bats[i] = new Battlefield(minions);
             }
             long reward = Math.round(ranlength*(BASE_REWARD*rewardMult));

@@ -51,22 +51,22 @@ public class Equipment implements Serializable {
             double mult = 1;
            switch(grade) {
                         case COMMON: 
-                          mult = EquipmentGrade.COMMON_MULT;
+                          mult = EquipmentGrade.COMMON.getMultipiler();
                         break;
                         case UNCOMMON:
-                          mult = EquipmentGrade.UNCOMMON_MULT;  
+                          mult = EquipmentGrade.UNCOMMON.getMultipiler();  
                         break;
                         case RARE:
-                          mult = EquipmentGrade.RARE_MULT;  
+                          mult = EquipmentGrade.RARE.getMultipiler();  
                         break;
                         case EPIC:
-                          mult = EquipmentGrade.EPIC_MULT;  
+                          mult = EquipmentGrade.EPIC.getMultipiler();  
                         break;
                         case LEGENDARY:
-                          mult = EquipmentGrade.COMMON_MULT;  
+                          mult = EquipmentGrade.LEGENDARY.getMultipiler();  
                         break;
                         case MYTHIC:
-                          mult = EquipmentGrade.COMMON_MULT;  
+                          mult = EquipmentGrade.MYTHIC.getMultipiler();  
                         break;
             }
            return mult;
@@ -121,15 +121,15 @@ public class Equipment implements Serializable {
     public static int getTokenUpgradePrice(EquipmentGrade grade) {
             switch(grade) {
                         case COMMON: 
-                            return EquipmentGrade.UNCOMMON_TOKEN_NEEDED;
+                            return EquipmentGrade.UNCOMMON.getTokenneeded();
                         case UNCOMMON:
-                            return EquipmentGrade.RARE_TOKEN_NEEDED;
+                            return EquipmentGrade.RARE.getTokenneeded();
                         case RARE:
-                            return EquipmentGrade.EPIC_TOKEN_NEEDED;
+                            return EquipmentGrade.EPIC.getTokenneeded();
                         case EPIC:
-                            return EquipmentGrade.LEGENDARY_TOKEN_NEEDED;
+                            return EquipmentGrade.LEGENDARY.getTokenneeded();
                         case LEGENDARY:
-                            return EquipmentGrade.MYTHIC_TOKEN_NEEDED;
+                            return EquipmentGrade.LEGENDARY.getTokenneeded();
                         case MYTHIC:
                             return 0;
                         default:
@@ -180,22 +180,22 @@ public class Equipment implements Serializable {
     if (equipmentlevel < MAX_EQUIPMENT_LEVEL) {
             switch(grade) {
                         case COMMON: 
-                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.COMMON_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.COMMON.getLvcost(), EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
                         case UNCOMMON:
-                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.UNCOMMON_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.UNCOMMON.getLvcost(), EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
                         break;
                         case RARE:
-                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.RARE_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.RARE.getLvcost(), EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);  
                         break;
                         case EPIC:
-                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.EPIC_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.EPIC.getLvcost(), EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
                         case LEGENDARY:
-                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.LEGENDARY_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.LEGENDARY.getLvcost(), EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
                         case MYTHIC:
-                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.MYTHIC_COST, EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
+                          price = Equipment.calculateUpgradePrice(equipmentlevel, EquipmentGrade.MYTHIC.getLvcost(), EquipmentGrade.PRICE_INCREASE_PER_LEVEL_MULT);
                         break;
             }
         }

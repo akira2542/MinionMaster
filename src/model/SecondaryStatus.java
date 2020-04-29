@@ -10,5 +10,14 @@ package model;
  * @author COM
  */
 public enum SecondaryStatus {
-     STUN
+     STUNNED(1),STABLE(0);
+     final int turntime;
+     SecondaryStatus(final int newturntime) {
+     turntime = newturntime;
+     }
+    public int getTurntime() {
+        return turntime;
+    }
+     
+     
 }

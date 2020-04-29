@@ -53,6 +53,16 @@ public abstract class PlayableMinion extends Minion{
     public long getXPpool() {
         return XPpool;
     }
+
+    public Minion getNext() {
+        return next;
+    }
+
+    public Minion getPrevious() {
+        return previous;
+    }
+    
+    
     
     //share xp function using linked list recursively
     private void shareXP(long xp) {
