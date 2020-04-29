@@ -47,10 +47,10 @@ import model.PrimaryStatus;
 
 
     @Override
-    public void actionDecider(Minion[] ourpaty, Minion[] enemyparty) {
+    public void actionDecider(Minion[] ourparty, Minion[] enemyparty) {
  for (int i = 0; i < enemyparty.length; i++) {
             Minion minion = enemyparty[i];
-            Minion team   =  ourpaty[i];
+            Minion team   =  ourparty[i];
             if (team.getHealthpoint()<=50/100) {
               this.useSkillOn(team);
                

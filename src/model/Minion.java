@@ -81,7 +81,7 @@ public abstract class Minion implements Serializable {
     
     //abstract method
     protected abstract void useSkillOn(Minion minion);
-    public abstract void actionDecider(Minion[] ourpaty,Minion[] enemyparty);
+    public abstract void actionDecider(Minion[] ourparty,Minion[] enemyparty);
     
     //preconfigured method
     protected void attackOn(Minion enemy){
