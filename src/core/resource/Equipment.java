@@ -56,7 +56,6 @@ public class Equipment implements Serializable {
         if (index == WEAPON_INDEX) {
             this.weaponlv++;
         } else if (index == ARMOR_INDEX){
-            this.armorGrade = incrementGrade(armorGrade);
             this.armorlv++;
         }
     

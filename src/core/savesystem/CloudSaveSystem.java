@@ -91,7 +91,7 @@ public class CloudSaveSystem {
             Logger.getLogger(CloudSaveSystem.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }else {
-            System.out.println("Username exist, update profile");
+        System.out.println("Username exist, update profile");
         updateSave(profile,pwd);
         }
         }catch (UnmatchingIndexPositionException | UnmatchingLinkedListException ex){
@@ -99,7 +99,7 @@ public class CloudSaveSystem {
         }   
     }
     
-    public PlayerProfile readProfile(String user,String password){
+    public PlayerProfile queryProfile(String user,String password){
         if (!isUserPasswordCorrect(user,password)){System.out.println("incrroect username/password"); return null;}
         String sql = "SELECT * FROM "+TABLE_NAME+" WHERE usr like '"+user+"'";
         try (Connection conn = DBConnector.getConnection();
@@ -187,7 +187,7 @@ public class CloudSaveSystem {
         return false;
     }
     
-    public boolean isUserPasswordCorrect(String username,String pwd) {
+    private boolean isUserPasswordCorrect(String username,String pwd) {
         if (isUsernameExist(username)) {
             String sql = "SELECT * FROM "+TABLE_NAME+" WHERE usr like '"+username+"'"+" && pwd like '"+pwd+"'";
             try (Connection conn = DBConnector.getConnection();
@@ -236,8 +236,28 @@ public class CloudSaveSystem {
     }
     
     
-//    public getLeaderBoard(){
-//    
-//    }
-//    
+    public String getLeaderBoard(){
+            String sql = "SELECT usr,score from userprofile ORDER by score limit 10";
+            try (Connection conn = DBConnector.getConnection();
+                Statement stm = conn.createStatement();
+                ResultSet rs = stm.executeQuery(sql);) {
+                StringBuilder s = new StringBuilder();
+                s.append("============================\n");
+                s.append("         LEADERBOARD        \n");
+                s.append("============================\n");
+                int i = 1;
+                while(rs.next()){
+                    String usr = rs.getString("usr");
+                    long score = rs.getInt("score");
+                    String temp = i+" | USER : "+usr+" SCORE : "+score+"\n";
+                    s.append(temp);
+                    i++;
+                }
+                return s.toString();
+            }catch (SQLException ex) {
+                Logger.getLogger(CloudSaveSystem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return "something wrong!";
+    }
+    
 }

@@ -34,20 +34,25 @@ public class Thief extends PlayableMinion {
 
     @Override
     protected void useSkillOn(Minion minion) {
-        if (this.getManapoint() >= 20) {
-            System.out.println(this.getName() + "had used Skill 'Increase Atk + 40 ap'! on " + minion.getName());
-            this.setManapoint(this.getManapoint() - 20);
-
-        }
+            System.out.println(this.getName() + "had used Skill 'Back Stab'! on " + minion.getName());
+            this.setManapoint(this.getManapoint() - 5);
+            double criticaldmg = this.getCalculatedAttackPoint()*2;
+            this.attackOn(minion,criticaldmg);
     }
 
    @Override
     public void actionDecider(Minion[] ourparty, Minion[] enemyparty) {
-        for (int i = 0; i < enemyparty.length; i++) {
-            Minion minion = enemyparty[i];
+        for ( int lastindex = enemyparty.length - 1; lastindex > 0; lastindex--) {
+            Minion minion = enemyparty[lastindex];
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
-              this.attackOn(minion);
-              break;
+                int rand = (int) Math.round(Math.random()*100);
+                if (rand < 50 && this.getManapoint() > 5){
+                    this.useSkillOn(minion);
+                    break;
+                }else{
+                    this.attackOn(minion);
+                    break;
+                }
             }
         }
     }

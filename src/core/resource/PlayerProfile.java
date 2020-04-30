@@ -56,12 +56,28 @@ public class PlayerProfile implements Serializable,Iterable<Minion>{
         this.gold += gold;
     }
     
+    public boolean spendGold(long gold) {
+        if ((this.gold - gold) > 0) {
+        this.gold -= gold;
+        return true;
+        }
+        return false;
+    }
+    
     public void receiveScore(long score) {
         this.score += score;
     }
     
     public void receiveToken(int token) {
         this.token += token;
+    }
+    
+    public boolean spendToken(int token) {
+        if ((this.token - token) > 0) {
+        this.token -= token;
+        return true;
+        }
+        return false;
     }
 
     public String getUsername() {

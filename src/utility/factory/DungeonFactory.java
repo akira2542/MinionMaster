@@ -56,7 +56,6 @@ public class DungeonFactory {
         }
         
         private static int randomBetweenNum(int low,int high) {
-            //throw exception here
              high++;
              Random r = new Random();
              return r.nextInt(high-low) + low;
@@ -65,10 +64,5 @@ public class DungeonFactory {
         private static int randomWithDeviation(int num,int deviation) {
             return randomBetweenNum(num-deviation,num+deviation);
         }
-        
-        public static void main(String[] args) {
-        int i = randomBetweenNum(ClassIndex.GOBLIN_INDEX,ClassIndex.ORC_INDEX);
-            System.out.println(i);
-    }
         
 }

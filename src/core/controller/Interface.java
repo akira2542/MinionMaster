@@ -40,7 +40,7 @@ public class Interface {
         System.out.println("=========================");
         System.out.println("WELCOME TO MINION MASTER©");
         System.out.println("=========================");
-        System.out.println("Load or Create new save game ");
+        System.out.println("Load or Create new save game || creating new profile and cloud sve required database connection");
         System.out.println("1 | Load local save");
         System.out.println("2 | Load cloud save");
         System.out.println("3 | Create new profile");
@@ -55,6 +55,7 @@ public class Interface {
                             break;
                         case 2:
                             inputcheck = false;
+                            cloudLoadInterface(scn);
                             break;
                         case 3:                            
                             inputcheck = false;
@@ -79,7 +80,7 @@ public class Interface {
             if (cs.isUsernameExist(input)) {
                 System.out.println("this name has been taken try another name");
             } else {
-            inputcheck = false;
+                inputcheck = false;
                 System.out.println("Username '"+input+"' has been created!");
                 this.sessionprofile = new PlayerProfile(input);
                 partyCreator(scn);
@@ -131,13 +132,13 @@ public class Interface {
         System.out.println("Party has been assembled here's an overview");
         for (Minion p : sessionprofile) {
         System.out.println(p);
-        baseInterface(scn);    
         }
+        baseInterface(scn);    
         
     }
 
 
-    public void baseInterface(Scanner scn) {
+    private void baseInterface(Scanner scn) {
             System.out.println("=======================");
             System.out.println("     Base Interface    ");
             System.out.println("=======================");
@@ -145,7 +146,7 @@ public class Interface {
             System.out.println("1 | Go to battle with your minions");
             System.out.println("2 | Mange your minion equipments");
             System.out.println("3 | Check your treasury and tokens");
-            System.out.println("4 | Check score");
+            System.out.println("4 | Check LeaderBoard and score");
             System.out.println("5 | Save Online Profile");
             System.out.println("6 | Save Local Profile");
             System.out.println("7 | exit (without saving)");
@@ -169,14 +170,16 @@ public class Interface {
                     baseInterface(scn);
                     break;
                 case 4 :
-                    System.out.println("=======================");
-                    System.out.println("         Score         ");
+                    CloudSaveSystem cs = new CloudSaveSystem();
+                    System.out.println(cs.getLeaderBoard());
                     System.out.println("=======================");
                     System.out.println("your score :"+ this.sessionprofile.getScore());
+                    System.out.println("=======================");
                     TimeStopper.userInput();
                     baseInterface(scn);
                     break;
                 case 5 :
+                    cloudSaveInterface(scn);
                     break;
                 case 6:
                     localSaveInterface(scn);
@@ -196,7 +199,7 @@ public class Interface {
 
     }
 
-    public void goBattle(Scanner scn) {
+    private void goBattle(Scanner scn) {
         boolean inputcheck = true;
         Dungeon dungeon = null;
         while (inputcheck) {
@@ -230,12 +233,13 @@ public class Interface {
             }
             TimeStopper.userInput();
             dungeon.enter(sessionprofile);
+            inputcheck = false;
             baseInterface(scn);
         }
         
     }
 
-    public void upequipmentInterface(Scanner scn) {
+    private void upequipmentInterface(Scanner scn) {
         //upgrade minion's equipment
         boolean inputcheck = true;
         while(inputcheck) {
@@ -265,14 +269,14 @@ public class Interface {
         }
     }
     
-    public void characterEquipment(Scanner scn,Minion m) {
+    private void characterEquipment(Scanner scn,Minion m) {
         boolean inputcheck = true;
         Equipment e = m.getEquipment();
+        while (inputcheck) {
         long wplvcost = Equipment.getIncreaseEquipmentLevelPrice(e.getWeaponlv(), e.getWeaponGrade());
         long arlvcost = Equipment.getIncreaseEquipmentLevelPrice(e.getArmorlv(), e.getArmorGrade());
         int wpgradecost = Equipment.getTokenUpgradePrice(e.getWeaponGrade());
         int argradecost = Equipment.getTokenUpgradePrice(e.getArmorGrade());
-        while (inputcheck) {
         System.out.println("=========================================================");
         System.out.println(" EQUIPMENT UPGRADE FOR LV."+m.getLevel()+" "+m.getName());
         System.out.println("=========================================================");
@@ -282,13 +286,82 @@ public class Interface {
         System.out.println("3 | Advance your weapon grade using tokens  | COST: "+wpgradecost+" TOKENS");
         System.out.println("4 | Advance your armor grade using tokens   | COST: "+argradecost+" TOKENS");
         System.out.println("5 | Back");
-        System.out.println("Available Gold :"+this.sessionprofile.getGold()+", Available Tokens "+this.sessionprofile);
+        System.out.println("Available Gold :"+this.sessionprofile.getGold()+", Available Tokens "+this.sessionprofile.getToken());
         System.out.print("Your option : ");
         int input = scn.nextInt();
+            System.out.println("\n\n");
+        switch (input) {
+            case 1:
+                    if (wplvcost > 0){
+                        if (this.sessionprofile.spendGold(wplvcost)) {
+                            e.increaseEquiptmentLevel(Equipment.WEAPON_INDEX);
+                            System.out.println("minions weapon level has been advance to lv."+e.getWeaponlv());
+                            TimeStopper.userInput();
+                        }else{
+                            System.out.println("Not enough gold!");
+                            TimeStopper.userInput();
+                        }    
+                    }else{
+                    System.out.println("Your minion's weapon reached max level and can not be upgraded further!");
+                    TimeStopper.userInput();
+                    }
+                break;
+            case 2:
+                    if (arlvcost > 0){
+                        if (this.sessionprofile.spendGold(arlvcost)) {
+                            e.increaseEquiptmentLevel(Equipment.WEAPON_INDEX);
+                            System.out.println("minion's armor level has been advance to lv."+e.getArmorlv());
+                            TimeStopper.userInput();
+                        }else{
+                            System.out.println("Not enough gold!");
+                            TimeStopper.userInput();
+                        }    
+                    }else{
+                    System.out.println("Your minon's armor reached max level and can not be upgraded further!");
+                    TimeStopper.userInput();
+                    }
+                break;
+            case 3:
+                    if (wpgradecost > 0){                
+                        if (this.sessionprofile.spendToken(wpgradecost)) {
+                            e.advanceUquipmentGrade(Equipment.WEAPON_INDEX);
+                            System.out.println("minion's weapon grade has been advance to "+e.getWeaponGrade());
+                            TimeStopper.userInput();
+                        }else{
+                            System.out.println("Not enough gold!");
+                            TimeStopper.userInput();
+                        }    
+                    }else{
+                    System.out.println("Your minon's weapon reached max grade and can not be upgraded further!");
+                    TimeStopper.userInput();
+                    }
+                break;
+            case 4:
+                    if (argradecost > 0){                                
+                        if (this.sessionprofile.spendToken(argradecost)) {
+                            e.advanceUquipmentGrade(Equipment.ARMOR_INDEX);
+                            System.out.println("minion's armor grade has been advance to "+e.getArmorGrade());
+                            TimeStopper.userInput();
+                        }else{
+                            System.out.println("Not enough gold!");
+                            TimeStopper.userInput();
+                        }    
+                    }else{
+                    System.out.println("Your minon's armor reached max grade and can not be upgraded further!");
+                    TimeStopper.userInput();
+                    }
+                break;
+            case 5:
+                inputcheck = false;
+                break;
+            default:
+                System.out.println("invalid option, try agian");            
+                break;
+        }
         }
     }
     
-    public void localSaveInterface(Scanner scn) {
+    private void localSaveInterface(Scanner scn) {
         boolean inputcheck = true;
         while (inputcheck) {
         System.out.println("=======================");
@@ -308,7 +381,7 @@ public class Interface {
         }
     }
     
-    public void localLoadInterface(Scanner scn) {
+    private void localLoadInterface(Scanner scn) {
         boolean inputcheck = true;
         while (inputcheck) {
         System.out.println("=======================");
@@ -348,6 +421,47 @@ public class Interface {
         System.out.println(s);
         return slots;
     }
+    
+    private void cloudSaveInterface(Scanner scn) {
+        //establish connection by building an object
+        CloudSaveSystem cs = new CloudSaveSystem();
+        System.out.println("=======================");
+        System.out.println("       SAVE CLOUD      ");
+        System.out.println("=======================");
+        System.out.println("Enter password to use cloud save (if you never use cloud save before this will be your password)");
+        System.out.println("Your password (case sensitive) : ");
+        String password = scn.next();
+        cs.insertProfile(sessionprofile, password);
+        baseInterface(scn);
+    }
+    
+    private void cloudLoadInterface(Scanner scn) {
+        boolean inputcheck = true;
+        while(inputcheck) {
+        CloudSaveSystem cs = new CloudSaveSystem();
+            System.out.println("=======================");
+            System.out.println("       LOAD CLOUD      ");
+            System.out.println("=======================");
+            System.out.println("Enter Username and Password to load Cloud Save");
+            System.out.print("Username : ");
+            String usr = scn.next();
+            System.out.print("\nPassword : ");
+            String pwd = scn.next();
+            PlayerProfile temp = cs.queryProfile(usr, pwd);
+            if (temp != null) {
+                System.out.println("Save loaded successfully");
+                System.out.println("Welcome '"+temp.getUsername()+"'");
+                TimeStopper.Delay();
+                inputcheck = false;
+                this.sessionprofile = temp;
+                baseInterface(scn);
+            }else {
+                System.out.println("invalid username/password");
+            }
+        }
+        
+    }
+    
 
     public static void main(String[] args) {
         Interface n = new Interface();

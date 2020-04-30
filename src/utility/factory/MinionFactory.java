@@ -50,7 +50,7 @@ public class MinionFactory {
     public static Minion createPlayableMinion(int classIndex,long xp,int weaponlevel,EquipmentGrade weapongrade,int armorlevel,EquipmentGrade armorgrade) {
         PlayableMinion m = (PlayableMinion) createPlayableMinion(classIndex);
         int level = PlayableMinion.calculateLevelByXP(xp);
-        long surplusxp = xp - PlayableMinion.calculateXPByLevel(level);
+        long surplusxp = ((xp - PlayableMinion.calculateXPByLevel(level)) >= 0)? xp - PlayableMinion.calculateXPByLevel(level): 0;
         m.setLevel(level);
         m.receiveXP(surplusxp);
         m.setEquipment(new Equipment(weaponlevel,weapongrade,armorlevel,armorgrade));

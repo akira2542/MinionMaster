@@ -6,11 +6,10 @@
 package core.resource;
 
 import core.resource.PlayerProfile;
-import content.minion.Goblin;
-import exception.UnmatchingLinkedListException;
 import model.Minion;
 import model.PlayableMinion;
 import model.enumurator.Difficulty;
+import utility.TimeStopper;
 import utility.factory.DungeonFactory;
 import utility.factory.MinionFactory;
 
@@ -25,17 +24,6 @@ public class Dungeon {
   private long clearscore;
   private int token; 
   
-    public static void main(String[] args) {
-        PlayerProfile p = new PlayerProfile();
-        MinionFactory.reassemblePlayerParty(p.getPlayerParty());
-        Dungeon d = DungeonFactory.createDungeon(Difficulty.EASY);
-        Minion[] m = p.getPlayerParty();
-        
-        d.enter(p);
-        
-    }
-  
-  
   public Dungeon(Battlefield[] battleFields,long reward,long score,int token) {
       this.battlefields = battleFields;
       this.reward = reward;
@@ -46,12 +34,18 @@ public class Dungeon {
   public void enter(PlayerProfile profile){
       Minion[] visitingParty = profile.getPlayerParty();
       restoreHealth(visitingParty);
+      System.out.println("=========================");
+      System.out.println("  WELCOME TO THE DUNGEON ");
+      System.out.println("=========================");
+      System.out.println("This Dungeon has '"+this.battlefields.length+"' room long");
       for (int i = 0; i < battlefields.length; i++) {
           int roomnum = i+1;
           System.out.println("Room No. "+roomnum+" Battle Begins!");
+          TimeStopper.Delay();
           if (this.battlefields[i].battle(visitingParty)) {
               this.restoreHealth(visitingParty);
               System.out.println("Room No. "+roomnum+" Cleared!");
+              TimeStopper.userInput();
               if ( roomnum == this.battlefields.length ) {
                   System.out.println("The dungoen is cleared");
                   System.out.println("Player recieve reward of ");

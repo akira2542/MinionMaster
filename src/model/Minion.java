@@ -89,9 +89,9 @@ public abstract class Minion implements Serializable {
     public abstract void actionDecider(Minion[] ourparty,Minion[] enemyparty);
     
     //preconfigured method
-    protected void attackOn(Minion enemy){
+    protected void attackOn(Minion enemy,double skillDamage){
         if (evasionCheck(this.accuracy)) {
-            double deductedDmg = enemy.armorCheck(this.getCalculatedAttackPoint());
+            double deductedDmg = enemy.armorCheck(skillDamage);
             enemy.healthpoint -= deductedDmg;
             System.out.println("lv."+this.getLevel()+" "+this.getName()+"("+this.getPosition()+")"+" attacked "+"lv."+enemy.getLevel()+" "+enemy.getName()+"("+enemy.getPosition()+")"+" Deals "+deductedDmg+" damage, " + "reduce it's health to " + enemy.getHealthpoint());
            
@@ -106,7 +106,8 @@ public abstract class Minion implements Serializable {
         TimeStopper.Delay(1);
     }
     
-    protected void attackOn(Minion minion,int SkillDamage) {
+    protected void attackOn(Minion minion) {
+        attackOn(minion,this.getCalculatedAttackPoint());
     }
     
     private boolean evasionCheck(double accuracy) {
