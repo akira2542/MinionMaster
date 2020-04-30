@@ -44,6 +44,7 @@ public class Interface {
         System.out.println("1 | Load local save");
         System.out.println("2 | Load cloud save");
         System.out.println("3 | Create new profile");
+        System.out.println("4 | [TEST] Create local profile that doesn't connect to database");
         System.out.print("your option : ");
         boolean inputcheck = true; 
             while(inputcheck){
@@ -60,7 +61,9 @@ public class Interface {
                         case 3:                            
                             inputcheck = false;
                             createNewProfileInterface(scn);
-                            break;
+                            break; 
+                        case 4:
+                            testCreateNewProfileInterface(scn);
                         default:
                             System.out.println("incorrect input, try again");
                             break;
@@ -86,6 +89,19 @@ public class Interface {
                 partyCreator(scn);
             }
         }
+    }
+    
+    
+    // for testing wheb there no connection with Database
+        private void testCreateNewProfileInterface(Scanner scn) {
+            System.out.println("this is for creating profile for testing if DatabaseC");
+            System.out.println("Insert Username");
+            System.out.println("#it can't not be changed later!");
+            System.out.print("username : ");
+            String input = scn.next();
+            System.out.println("Username '"+input+"' has been created!");
+            this.sessionprofile = new PlayerProfile(input);
+            partyCreator(scn);
     }
     
     private void partyCreator(Scanner scn) {
