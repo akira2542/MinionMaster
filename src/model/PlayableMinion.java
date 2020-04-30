@@ -69,7 +69,7 @@ public abstract class PlayableMinion extends Minion{
     
     //share xp function using linked list recursively
     private void shareXP(long xp) {
-        long distributedXP = (long) Math.round((xp/100) * 0.05);
+        long distributedXP = (long) Math.round((xp * 0.05));
         this.XPpool += distributedXP;
         if (this.next instanceof PlayableMinion && this.next != null) {
             PlayableMinion nextminion = (PlayableMinion) this.next;

@@ -144,7 +144,7 @@ public class Interface {
             System.out.println("=======================");
             System.out.println("welcome '"+this.sessionprofile.getUsername()+"' to the base! here you can choose to");
             System.out.println("1 | Go to battle with your minions");
-            System.out.println("2 | Mange your minion equipments");
+            System.out.println("2 | Manage your minion equipments");
             System.out.println("3 | Check your treasury and tokens");
             System.out.println("4 | Check LeaderBoard and score");
             System.out.println("5 | Save Online Profile");
@@ -460,15 +460,5 @@ public class Interface {
             }
         }
         
-    }
-    
-
-    public static void main(String[] args) {
-        Interface n = new Interface();
-        // n.localLoadSaveInterface();
-         //n.goBattle();
-//       n.newGame();
-         //n.upequipmentlevel();
-
     }
 }

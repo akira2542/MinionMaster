@@ -32,10 +32,10 @@ public class Duelist extends PlayableMinion {
     
     @Override
     protected void useSkillOn(Minion minion) {
-         if(this.getManapoint()>= 10){
-        System.out.println(this.getName() + "had used Skill 'Deal 80%of atk to all enemy'! on " + minion.getName());
-         this.setManapoint(this.getManapoint()-15);
-         }
+            System.out.println(this.getName() + " had used Skill 'Attack harder'! on " + minion.getName());
+            this.setManapoint(this.getManapoint() - 5);
+            double criticaldmg = this.getCalculatedAttackPoint()*2;
+            this.attackOn(minion,criticaldmg);
     }
 
    @Override
@@ -43,8 +43,14 @@ public class Duelist extends PlayableMinion {
         for (int i = 0; i < enemyparty.length; i++) {
             Minion minion = enemyparty[i];
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
+              int rand = (int) Math.round(Math.random()*100);
+              if (rand < 30) {
+              this.useSkillOn(minion);
+              break;
+              }else{
               this.attackOn(minion);
               break;
+              }
             }
         }
     }

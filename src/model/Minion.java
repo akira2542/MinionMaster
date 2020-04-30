@@ -46,11 +46,7 @@ public abstract class Minion implements Serializable {
     private double maxmanapoint;
     private double healthpoint;
 
-
-    public void setInflictstatustime(double inflictstatustime) {
-        this.inflictstatustime = inflictstatustime;
-    }
-    private double inflictstatustime;
+    
     
     
     //contructor
@@ -145,9 +141,7 @@ public abstract class Minion implements Serializable {
         }
     }
     
-    public double getInflictstatustime() {
-        return inflictstatustime;
-    }
+
 
     
     public void setEquipment(Equipment equipment) {
@@ -166,7 +160,7 @@ public abstract class Minion implements Serializable {
         this.primarystatus = primarystatus;
     }
 
-    protected void setSecondarystatus(SecondaryStatus secondarystatus) {
+    public void setSecondarystatus(SecondaryStatus secondarystatus) {
         this.secondarystatus = secondarystatus;
     }
 
@@ -178,6 +172,7 @@ public abstract class Minion implements Serializable {
     this.healthpoint = this.maxhealthpoint;
     this.manapoint = this.maxmanapoint;
     this.secondarystatus = SecondaryStatus.STABLE;
+    this.primarystatus = PrimaryStatus.ALIVE;
     }
 
     public double getAccuracy() {

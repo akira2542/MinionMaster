@@ -34,7 +34,7 @@ public class Thief extends PlayableMinion {
 
     @Override
     protected void useSkillOn(Minion minion) {
-            System.out.println(this.getName() + "had used Skill 'Back Stab'! on " + minion.getName());
+            System.out.println(this.getName() + " had used Skill 'Back Stab'! on " + minion.getName());
             this.setManapoint(this.getManapoint() - 5);
             double criticaldmg = this.getCalculatedAttackPoint()*2;
             this.attackOn(minion,criticaldmg);

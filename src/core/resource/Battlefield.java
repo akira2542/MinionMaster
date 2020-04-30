@@ -9,7 +9,6 @@ import exception.UnmatchingIndexPositionException;
 import exception.UnmatchingLinkedListException;
 import model.Minion;
 import model.enumurator.PrimaryStatus;
-import utility.TimeStopper;
 
 /**
  *
@@ -30,12 +29,10 @@ public class Battlefield {
         boolean battleresult = false; // true = visiting party win
         while( !isAllDead(localParty) && !isAllDead(visitingParty)){
             this.turncounter++;
-           // System.out.print("To start new turn ");
-            //TimeStopper.userInput();
             System.out.println("Turn "+this.turncounter);
             System.out.println("visiting party turn!");
             for (Minion visitingminion : visitingParty) {
-                if(visitingminion.isStunned()) continue;
+                if(visitingminion.isStunned()){System.out.println(visitingminion.getName()+" is still stunned "); continue;}
                 visitingminion.actionDecider(visitingParty, localParty);
             }
             if (isAllDead(localParty)) {
@@ -45,7 +42,7 @@ public class Battlefield {
             }
             System.out.println("local party turn!");
             for (Minion localminion : this.localParty) {
-                if(localminion.isStunned()) continue;
+                if(localminion.isStunned()){System.out.println(localminion.getName()+" is still stunned "); continue;}
                 localminion.actionDecider(localParty, visitingParty);
             }
             if (isAllDead(visitingParty)) {
