@@ -33,8 +33,8 @@ public class DungeonFactory {
                 return null;
             }
         }
-        public static Dungeon createDungeon(Difficulty diffuculty) {
-        return assembleDungeon(diffuculty.getLvrange(),diffuculty.getDungeonlength(),diffuculty.getRewardmult(),diffuculty.getIndex());
+        public static Dungeon createDungeon(Difficulty difficulty) {
+        return assembleDungeon(difficulty.getLvrange(),difficulty.getDungeonlength(),difficulty.getRewardmult(),difficulty.getIndex());
         }
         
         private static Dungeon assembleDungeon(int levelrange,int length,double rewardMult,int token) {

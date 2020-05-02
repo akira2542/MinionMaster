@@ -22,8 +22,8 @@ public abstract class PlayableMinion extends Minion{
     private Minion next;
     private Minion previous;
 
-    public PlayableMinion(int index,String Mname, double basehelthpoint, double basemanapoint, double baseattackpoint, double basearmor, double baseevasion, double baseaccuracy, LevelMultipiler mult) {
-        super(index,Mname, basehelthpoint, basemanapoint, baseattackpoint, basearmor, baseevasion, baseaccuracy, mult);
+    public PlayableMinion(int index,String Mname, double basehealthpoint, double basemanapoint, double baseattackpoint, double basearmor, double baseevasion, double baseaccuracy, LevelMultipiler mult) {
+        super(index,Mname, basehealthpoint, basemanapoint, baseattackpoint, basearmor, baseevasion, baseaccuracy, mult);
     }
     
     //คำนวณ exp
@@ -69,7 +69,7 @@ public abstract class PlayableMinion extends Minion{
     
     //share xp function using linked list recursively
     private void shareXP(long xp) {
-        long distributedXP = (long) Math.round((xp * 0.05));
+        long distributedXP = (long) Math.round((xp * 0.005));
         this.XPpool += distributedXP;
         if (this.next instanceof PlayableMinion && this.next != null) {
             PlayableMinion nextminion = (PlayableMinion) this.next;

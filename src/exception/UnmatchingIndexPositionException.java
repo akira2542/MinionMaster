@@ -12,7 +12,8 @@ public class UnmatchingIndexPositionException extends Exception {
     private static final String MSG = "Position inside minion do not match Party index position";
     public UnmatchingIndexPositionException() {
         super(MSG);
-    } 
+    }
+    
     
     public static boolean isPositionMatch(Minion[] m) {
     boolean bool = true;
