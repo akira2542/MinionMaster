@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public class LevelMultipiler implements Serializable {
     private double HP_MULT;

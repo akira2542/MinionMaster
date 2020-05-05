@@ -64,11 +64,17 @@ public class Equipment implements Serializable {
     public void advanceEquipmentGrade(int index) {
         //if the grade is advanced weapon/armor level will be reset to 1
         if (index == WEAPON_INDEX) {
-            this.weaponGrade = incrementGrade(weaponGrade);
+            EquipmentGrade g = incrementGrade(weaponGrade);
+            if (g != null){
+            this.weaponGrade = g;
             this.weaponlv = 1;
+            }
         } else if (index == ARMOR_INDEX){
+            EquipmentGrade g = incrementGrade(weaponGrade);
+            if (g != null) {
             this.armorGrade = incrementGrade(armorGrade);
             this.armorlv = 1;
+            }
         }
     }
  
@@ -78,7 +84,7 @@ public class Equipment implements Serializable {
             return EquipmentGrade.getEquipmentGrade(nextindex);
             }
             System.out.println("Error incrementing grade");
-            return null;
+            return grade;
     }
 
     public static int getTokenUpgradePrice(EquipmentGrade grade) {

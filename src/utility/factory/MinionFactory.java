@@ -21,7 +21,7 @@ import model.PlayableMinion;
 
 /**
  *
- * @author COM
+ * @author CHANANAN
  */
 public class MinionFactory {
     
