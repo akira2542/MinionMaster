@@ -15,7 +15,7 @@ import model.Minion;
 
 /**
  *
- * @author COM
+ * @author CHANANAN
  */
 public class DungeonFactory {
     

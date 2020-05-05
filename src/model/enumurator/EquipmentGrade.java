@@ -7,7 +7,7 @@ package model.enumurator;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public enum EquipmentGrade {
     COMMON(1,1.1,100,0),UNCOMMON(2,15,250,10),RARE(3,1.8,500,25),EPIC(4,2.5,850,60),LEGENDARY(5,3,1200,100),MYTHIC(6,4,2000,200);

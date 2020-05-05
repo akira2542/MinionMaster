@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import core.resource.Equipment;
 import model.enumurator.EquipmentGrade;
 import model.Minion;
 import model.PlayableMinion;
@@ -25,25 +24,12 @@ import utility.factory.MinionFactory;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public class CloudSaveSystem {
     
     public static final String TABLE_NAME = "userprofile";
     
-//    public static void main(String[] args) {
-//       CloudSaveSystem cs = new CloudSaveSystem(); 
-//        PlayerProfile p = cs.readProfile("test", "123");
-//        PlayableMinion pm = (PlayableMinion) p.getPlayerParty()[0];
-//        System.out.println(p);
-//        p.receiveGold(500);
-//        cs.updateSave(p, "123");
-//         p = cs.readProfile("test", "123");
-//        System.out.println(p);
-//        PlayerProfile pt = new PlayerProfile();
-//        
-//        cs.insertProfile(p, "123");
-//    }
     
     public CloudSaveSystem() {
         //create table if not exist

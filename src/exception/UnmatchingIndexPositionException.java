@@ -7,7 +7,10 @@ package exception;
 
 import model.Minion;
 
-
+/**
+ *
+ * @author CHANANAN
+ */
 public class UnmatchingIndexPositionException extends Exception {
     private static final String MSG = "Position inside minion do not match Party index position";
     public UnmatchingIndexPositionException() {

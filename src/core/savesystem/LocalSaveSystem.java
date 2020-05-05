@@ -16,7 +16,7 @@ import java.io.ObjectOutputStream;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public class LocalSaveSystem {
     

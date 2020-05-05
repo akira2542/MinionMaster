@@ -12,7 +12,7 @@ import model.enumurator.PrimaryStatus;
 
 /**
  *
- * @author COM
+ * @author SURAPONGCHAMALAI
  */
 public class Orc extends Minion{
         

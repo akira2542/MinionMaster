@@ -7,7 +7,7 @@ package exception;
 
 /**
  *
- * @author COM
+ * @author CHANANAN
  */
 public class NullStatusException extends Exception{
     private static final String MSG = "Statuses is not suppose to be null"; 

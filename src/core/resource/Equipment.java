@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author COM
+ * @author SURAPONGCHAMALAI
  */
 public class Equipment implements Serializable {
     
@@ -53,15 +53,15 @@ public class Equipment implements Serializable {
     }
     
     public void increaseEquiptmentLevel(int index) {
-        if (index == WEAPON_INDEX) {
+        if (index == WEAPON_INDEX && this.weaponlv < MAX_EQUIPMENT_LEVEL) {
             this.weaponlv++;
-        } else if (index == ARMOR_INDEX){
+        } else if (index == ARMOR_INDEX && this.armorlv < MAX_EQUIPMENT_LEVEL){
             this.armorlv++;
         }
     
     }
     
-    public void advanceUquipmentGrade(int index) {
+    public void advanceEquipmentGrade(int index) {
         //if the grade is advanced weapon/armor level will be reset to 1
         if (index == WEAPON_INDEX) {
             this.weaponGrade = incrementGrade(weaponGrade);
@@ -72,8 +72,7 @@ public class Equipment implements Serializable {
         }
     }
  
-    private EquipmentGrade incrementGrade(EquipmentGrade grade) {
-            EquipmentGrade incrementedgrade = grade;
+    private EquipmentGrade incrementGrade(EquipmentGrade grade) {                                        
             int nextindex = grade.getIndex() + 1;
             if (nextindex <= EquipmentGrade.MYTHIC.getIndex()) {
             return EquipmentGrade.getEquipmentGrade(nextindex);

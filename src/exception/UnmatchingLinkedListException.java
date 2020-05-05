@@ -8,6 +8,11 @@ package exception;
 import model.Minion;
 import model.PlayableMinion;
 
+
+/**
+ *
+ * @author CHANANAN
+ */
 public class UnmatchingLinkedListException extends Exception{
     private static final String MSG = "PlayableMinons in the array have unmatched linked list";
     public UnmatchingLinkedListException() {

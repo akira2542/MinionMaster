@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package view;
+
+import core.controller.Interface;
 
 /**
  *
- * @author SURAPONGCHAMALAI
+ * @author COM
  */
-public class test {
-    
+public class Viewer {
+    public static void main(String[] args) {
+        Interface inter = new Interface();
+    }
 }

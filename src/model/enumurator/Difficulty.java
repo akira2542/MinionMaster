@@ -7,7 +7,7 @@ package model.enumurator;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public enum Difficulty {
         EASY(1,5,5,1.0),MEDIUM(2,10,10,1.2),HARD(3,25,15,1.5);

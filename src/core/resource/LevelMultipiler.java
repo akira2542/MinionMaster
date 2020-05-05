@@ -12,12 +12,12 @@ import java.io.Serializable;
  * @author COM
  */
 public class LevelMultipiler implements Serializable {
-    private static double HP_MULT;
-    private static double MP_MULT;
-    private static double AP_MULT;
-    private static double ARMOR_MULT;
-    private static double EVA_MULT;
-    private static double ACC_MULT;
+    private double HP_MULT;
+    private double MP_MULT;
+    private double AP_MULT;
+    private double ARMOR_MULT;
+    private double EVA_MULT;
+    private double ACC_MULT;
         
     public LevelMultipiler(double HP,double MP,double AP,double ARMOR, double EVA, double ACC) {
             HP_MULT = HP;

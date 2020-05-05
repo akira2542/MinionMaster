@@ -7,7 +7,7 @@ package model.enumurator;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public enum PrimaryStatus {
     ALIVE,DEAD

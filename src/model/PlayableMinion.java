@@ -10,7 +10,7 @@ import model.enumurator.PrimaryStatus;
 
 /**
  *
- * @author SURAPONGCHAMALAI
+ * @author RUANGRIT
  */
 public abstract class PlayableMinion extends Minion{
     
@@ -73,11 +73,11 @@ public abstract class PlayableMinion extends Minion{
         this.XPpool += distributedXP;
         if (this.next instanceof PlayableMinion && this.next != null) {
             PlayableMinion nextminion = (PlayableMinion) this.next;
-            nextminion.shareXPNext(xp);
+            nextminion.shareXPNext(distributedXP);
         }
         if (this.previous instanceof PlayableMinion && this.previous != null) {
             PlayableMinion nextminion = (PlayableMinion) this.previous;
-            nextminion.shareXPNext(xp);
+            nextminion.shareXPNext(distributedXP);
         }
     }
     

@@ -7,7 +7,7 @@ package model.enumurator;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public enum ClassIndex {
     KNIGHT(101),PRIEST(102),DUELIST(103),THIEF(104),GOBLIN(201),ORC(202);

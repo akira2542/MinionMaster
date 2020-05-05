@@ -13,7 +13,6 @@ import content.minion.Orc;
 import content.playableminon.Knight;
 import content.playableminon.Priest;
 import content.playableminon.Thief;
-import core.resource.PlayerProfile;
 import model.enumurator.ClassIndex;
 import core.resource.Equipment;
 import model.enumurator.EquipmentGrade;
@@ -75,8 +74,6 @@ public class MinionFactory {
     }
     
     public static void reassemblePlayerParty(Minion[] minions) {
-//        Minion[] m = new Minion[minions.length];
-//        System.arraycopy(minions, 0, m, 0, 0);
         for (int i = 0; i < minions.length; i++) {
             PlayableMinion minion = (PlayableMinion) minions[i];
             minion.setPosition(i);

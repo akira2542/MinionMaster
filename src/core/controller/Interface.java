@@ -15,7 +15,6 @@ import model.Minion;
 import model.enumurator.ClassIndex;
 import utility.factory.DungeonFactory;
 import model.enumurator.Difficulty;
-import model.enumurator.EquipmentGrade;
 import utility.TimeStopper;
 import utility.factory.MinionFactory;
 
@@ -37,6 +36,15 @@ public class Interface {
     //  newgame loadgame
     //create profile createchar
     private void newGame(Scanner scn){
+        System.out.println("███╗    ███╗ ██╗███╗   ██╗██╗ ██████╗   ███╗   ██╗███╗   ███╗  █████╗ ███████╗████████╗███████╗██████╗ ");
+        System.out.println("████╗ ████║ ██║████╗  ██║██║██╔══██╗ ████╗  ██║████╗ ████║ ██╔═██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗");
+        TimeStopper.Delay();
+        System.out.println("██╔████╔██║██║██╔██╗ ██║██║██║   ██║ ██╔██╗ ██║██╔████╔██║██████║███████╗    ██║      █████╗  ██████╔╝");
+        System.out.println("██║╚██╔╝██║██║██║╚██╗██║██║██║  ██║ ██║╚██╗██║██║╚██╔╝██║██╔═██║╚════██║    ██║      ██╔══╝  ██╔══██╗");
+        TimeStopper.Delay();
+        System.out.println("██║ ╚═╝  ██║██║██║ ╚████║ ██║╚██████ ██║ ╚████║ ██║ ╚═╝  ██║██║  ██║███████║    ██║     ███████╗██║  ██║");
+        System.out.println("╚═╝        ╚═╝╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝");
+        TimeStopper.userInput();
         System.out.println("=========================");
         System.out.println("WELCOME TO MINION MASTER©");
         System.out.println("=========================");
@@ -46,30 +54,25 @@ public class Interface {
         System.out.println("3 | Create new profile");
         System.out.println("4 | [TEST] Create local profile that doesn't connect to database");
         System.out.print("your option : ");
-        boolean inputcheck = true; 
-            while(inputcheck){
-                    int input = scn.nextInt();
-                    switch(input){
-                        case 1:
-                            inputcheck = false;
-                            localLoadInterface(scn);
-                            break;
-                        case 2:
-                            inputcheck = false;
-                            cloudLoadInterface(scn);
-                            break;
-                        case 3:                            
-                            inputcheck = false;
-                            createNewProfileInterface(scn);
-                            break; 
-                        case 4:
-                            testCreateNewProfileInterface(scn);
-                        default:
-                            System.out.println("incorrect input, try again");
-                            break;
-                            
+            int input = scn.nextInt();
+                switch(input){
+                    case 1:
+                        localLoadInterface(scn);
+                        break;
+                    case 2:
+                        cloudLoadInterface(scn);
+                        break;
+                    case 3:                            
+                        createNewProfileInterface(scn);
+                        break; 
+                    case 4:
+                        testCreateNewProfileInterface(scn);
+                    default:
+                        System.out.println("incorrect input, try again");
+                        TimeStopper.Delay();
+                        newGame(scn);
+                        break;    
                     }    
-            }
     }
     
     private void createNewProfileInterface(Scanner scn) {
@@ -219,9 +222,9 @@ public class Interface {
         boolean inputcheck = true;
         Dungeon dungeon = null;
         while (inputcheck) {
-        System.out.println("===================");
-        System.out.println("    DUNGEON RAID   ");
-        System.out.println("===================");
+        System.out.println("====================");
+        System.out.println("    DUNGEON RAID    ");
+        System.out.println("====================");
         System.out.println("Choose Difficulty");
         System.out.println("1 | Easy");
         System.out.println("2 | Medium");
@@ -340,7 +343,7 @@ public class Interface {
             case 3:
                     if (wpgradecost > 0){                
                         if (this.sessionprofile.spendToken(wpgradecost)) {
-                            e.advanceUquipmentGrade(Equipment.WEAPON_INDEX);
+                            e.advanceEquipmentGrade(Equipment.WEAPON_INDEX);
                             System.out.println("minion's weapon grade has been advance to "+e.getWeaponGrade());
                             TimeStopper.userInput();
                         }else{
@@ -355,7 +358,7 @@ public class Interface {
             case 4:
                     if (argradecost > 0){                                
                         if (this.sessionprofile.spendToken(argradecost)) {
-                            e.advanceUquipmentGrade(Equipment.ARMOR_INDEX);
+                            e.advanceEquipmentGrade(Equipment.ARMOR_INDEX);
                             System.out.println("minion's armor grade has been advance to "+e.getArmorGrade());
                             TimeStopper.userInput();
                         }else{

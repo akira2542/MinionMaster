@@ -8,14 +8,11 @@ package core.resource;
 import core.resource.PlayerProfile;
 import model.Minion;
 import model.PlayableMinion;
-import model.enumurator.Difficulty;
 import utility.TimeStopper;
-import utility.factory.DungeonFactory;
-import utility.factory.MinionFactory;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public class Dungeon {
     

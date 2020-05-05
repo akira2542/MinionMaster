@@ -15,7 +15,7 @@ import utility.TimeStopper;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public abstract class Minion implements Serializable {
     
@@ -27,13 +27,15 @@ public abstract class Minion implements Serializable {
     private final double BASEEVA;
     private final double BASEACC;
     private final LevelMultipiler MULT;
-    private final int CLASS_INDEX;
+    private int CLASS_INDEX;
     
-    //changeble stat
+    //changeble stat    
     private int position;
     private int level;
+    private double maxmanapoint;
     private double maxhealthpoint;
     private double manapoint;
+    private double healthpoint;
     private double rawattackpoint;
     private double rawarmor;
     private double evasion;
@@ -41,10 +43,6 @@ public abstract class Minion implements Serializable {
     private PrimaryStatus primarystatus;
     private SecondaryStatus secondarystatus;
     private Equipment equipment; 
-    
-    //battle relatedvariable
-    private double maxmanapoint;
-    private double healthpoint;
 
     
     
@@ -134,7 +132,16 @@ public abstract class Minion implements Serializable {
     
     public void setLevel(int level) {
         if (this.level > level) {
-            System.out.println("this minion level exceed that number");
+                    this.maxhealthpoint = BASEHP;
+                    this.maxmanapoint = BASEMP;
+                    this.healthpoint = BASEHP;
+                    this.manapoint = BASEMP;
+                    this.rawattackpoint = BASEAP;
+                    this.rawarmor = BASEARMOR;
+                    this.evasion = BASEEVA;
+                    this.accuracy = BASEACC;
+                    this.level = 1;
+                    setLevel(level);
         }
         while(this.level < level) {
         this.levelUp();
@@ -235,6 +242,7 @@ public abstract class Minion implements Serializable {
     public int getCLASS_INDEX() {
         return CLASS_INDEX;
     }
+    
     
     public boolean isStunned(){
         try {

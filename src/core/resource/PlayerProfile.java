@@ -1,9 +1,5 @@
 package core.resource;
 
-import content.minion.Goblin;
-import content.playableminon.Duelist;
-import content.playableminon.Knight;
-import content.playableminon.Priest;
 import content.playableminon.Thief;
 import java.io.Serializable;
 import java.util.Iterator;
@@ -17,7 +13,7 @@ import model.Minion;
 
 /**
  *
- * @author COM
+ * @author RUANGRIT
  */
 public class PlayerProfile implements Serializable,Iterable<Minion>{
     
