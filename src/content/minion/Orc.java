@@ -33,16 +33,24 @@ public class Orc extends Minion{
     
     @Override
     protected void useSkillOn(Minion minion) {
-        System.out.println(this.getName() + "had used Skill 'Attack a little harder'! on " + minion.getName());
+        double healamount = this.getMaxhealthpoint()*0.2;
+        this.setHealthpoint(this.getHealthpoint()+healamount);
+        System.out.println(this.getName() + "had used Skill 'Self Heal' for "+healamount+" hp !");
     }
 
     @Override
     public void actionDecider(Minion[] ourpaty, Minion[] enemyparty) {
-        for (int i = 0; i < enemyparty.length; i++) {
-            Minion minion = enemyparty[i];
-            if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
-              this.attackOn(minion);
-              break;
+       int rand = (int) Math.round(Math.random()*100);
+       boolean lowhp = this.getHealthpoint() <= this.getMaxhealthpoint()*0.2;
+       if (rand <= 50 && lowhp) {
+       useSkillOn(this);
+       }else{
+            for (int i = 0; i < enemyparty.length; i++) {
+                Minion minion = enemyparty[i];
+                if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
+                    this.attackOn(minion);
+                    break;
+                }
             }
         }
     }

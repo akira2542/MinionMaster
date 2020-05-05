@@ -34,12 +34,10 @@ import model.enumurator.PrimaryStatus;
     
     @Override
     protected void useSkillOn(Minion minion) {
-        if(this.getManapoint()>= 12){
-        System.out.println(this.getName() + "had used Skill 'Heal'! on " + minion.getName());
-        this.setManapoint(this.getManapoint()-15);
-         minion.setHealthpoint(minion.getManapoint()+30);
-         
-        }
+        this.setManapoint(this.getManapoint()-5);
+        double healamout = minion.getHealthpoint()*0.2;
+        minion.setHealthpoint(minion.getHealthpoint()+healamout);
+        System.out.println("lv."+this.getLevel()+" "+this.getName()+"("+this.getPosition()+") Healed lv."+minion.getLevel()+" "+minion.getName()+"("+minion.getPosition()+")"+" for "+healamout);
     }
 
    
@@ -53,11 +51,8 @@ import model.enumurator.PrimaryStatus;
             Minion minion = ourparty[i];
             boolean lowhp = minion.getHealthpoint() < minion.getMaxhealthpoint()*0.6;
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE && lowhp && this.getManapoint() > 5) {
-                this.setManapoint(this.getManapoint()-5);
-                double healamout = minion.getHealthpoint()*0.2;
-                minion.setHealthpoint(minion.getHealthpoint()+healamout);
-                healed = true;
-                System.out.println("lv."+this.getLevel()+" "+this.getName()+"("+this.getPosition()+") Healed lv."+minion.getLevel()+" "+minion.getName()+"("+minion.getPosition()+")"+" for "+healamout);
+              useSkillOn(minion);
+              healed = true;
               break;
             }
         }

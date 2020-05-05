@@ -45,7 +45,7 @@ public class Knight extends PlayableMinion {
             Minion minion = enemyparty[i];
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
                int rand = (int) Math.round(Math.random()*100);
-               if (rand < 30 && this.getManapoint() > 5) {
+               if (rand <= 30 && this.getManapoint() > 5) {
                useSkillOn(minion);
                }
               this.attackOn(minion);

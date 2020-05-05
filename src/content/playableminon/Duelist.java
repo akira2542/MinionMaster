@@ -44,7 +44,7 @@ public class Duelist extends PlayableMinion {
             Minion minion = enemyparty[i];
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
               int rand = (int) Math.round(Math.random()*100);
-              if (rand < 30) {
+              if (rand <= 30) {
               this.useSkillOn(minion);
               break;
               }else{

@@ -33,7 +33,8 @@ public class Goblin extends Minion{
     
     @Override
     protected void useSkillOn(Minion minion) {
-        System.out.println(this.getName() + "had used Skill 'Attack a little harder'! on " + minion.getName());
+        System.out.println(this.getName() + "the goblin become desperate! had used Skill 'Attack a little harder'! on " + minion.getName());
+        attackOn(minion,this.getCalculatedAttackPoint()*1.5);
     }
 
     @Override
@@ -41,8 +42,15 @@ public class Goblin extends Minion{
         for (int i = 0; i < enemyparty.length; i++) {
             Minion minion = enemyparty[i];
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
+              int rand = (int) Math.round(Math.random()*100);
+              boolean lowhp = this.getHealthpoint() <= this.getMaxhealthpoint()*0.3;
+              if (rand <= 30 && lowhp){
+              useSkillOn(minion);
+              break;
+              }else{
               this.attackOn(minion);
               break;
+              }
             }
         }
     }

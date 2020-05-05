@@ -46,7 +46,7 @@ public class Thief extends PlayableMinion {
             Minion minion = enemyparty[lastindex];
             if (minion.getPrimarystatus() == PrimaryStatus.ALIVE) {
                 int rand = (int) Math.round(Math.random()*100);
-                if (rand < 50 && this.getManapoint() > 5){
+                if (rand <= 50 && this.getManapoint() > 5){
                     this.useSkillOn(minion);
                     break;
                 }else{
